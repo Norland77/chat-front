@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import {useConnectSocket} from "./hooks/useConnectSocket";
+import {useState} from "react";
+import SocketApi from "./api/socket-api";
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
+import Rooms from "./pages/Rooms/Rooms";
+import Layout from "./pages/Layout/Layout";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
 
 function App() {
+  useConnectSocket();
+  const [text, setText] = useState('')
+    const sendMessage = () => {
+      SocketApi.socket?.emit('chatToServer', {text: text})
+    }
+
+  const router = createBrowserRouter(createRoutesFromElements(
+      <Route path="/" element={<Layout/>}>
+        <Route path="/" element={<Register />}/>
+        <Route path="/rooms" element={<Rooms />}/>
+        <Route path="/login" element={<Login />}/>
+      </Route>
+  ))
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <RouterProvider router={router}/>
+  )
 }
 
 export default App;
