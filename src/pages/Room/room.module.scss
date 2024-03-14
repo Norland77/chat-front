@@ -1,0 +1,230 @@
+.body {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.sidebar {
+  width: 15%;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  border-left: none;
+  display: flex;
+  flex-direction: column;
+  > button {
+    width: 100%;
+    height: 20px;
+    background-color: #c01f23;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  > div {
+    > .sidebar_invite {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 20px 0;
+      margin: 20px 0;
+      border-bottom: 1px solid gray;
+      border-top: 1px solid gray;
+      > input {
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 2px;
+      }
+      > button {
+        background: none;
+        border: 1px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+    .sidebar_users {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      &_user {
+        display: flex;
+        gap: 5px;
+        > button {
+          border: black solid 1px;
+          border-radius: 5px;
+          background: none;
+          cursor: pointer;
+        }
+        > div {
+          width: 100%;
+          padding: 5px;
+          border: 1px solid black;
+          border-radius: 5px;
+          cursor: pointer;
+          > button {
+            padding: 2px;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+            transition-duration: .3s;
+            &:hover {
+              background-color: #878790;
+              transition-duration: .3s;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.room {
+  width: 85%;
+  border: 1px solid black;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 5px;
+  &_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    > p {
+      font-size: 16px;
+    }
+    > a {
+      text-decoration: none;
+      color: black;
+      transition-duration: .3s;
+      &:hover {
+        color: #878790;
+        transition-duration: .3s;
+      }
+    }
+  }
+  &_msgArea {
+    height: 100%;
+    overflow: auto;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    justify-content: end;
+  }
+  &_body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    &_msgDown {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      > .time {
+        font-size: 12px;
+        color: #f3f3f6;
+        place-self: flex-end;
+      }
+      > .btn {
+        font-size: 12px;
+        color: #f3f3f6;
+        cursor: pointer;
+      }
+    }
+    &_left {
+      width: fit-content;
+      background-color: #b7b6b6;
+      padding: 5px 8px;
+      border-radius: 5px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      position: relative;
+      min-width: 300px;
+      > span {
+        font-size: 14px;
+      }
+      > img {
+        width: 200px;
+      }
+    }
+    &_right {
+      width: fit-content;
+      place-self: flex-end;
+      background-color: #6D75C5;
+      padding: 5px 8px;
+      border-radius: 5px;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      position: relative;
+      min-width: 300px;
+      > span {
+        font-size: 14px;
+      }
+      > img {
+        width: 200px;
+      }
+    }
+    &_input {
+      width: 100%;
+      display: flex;
+      gap: 5px;
+      > input {
+        padding: 5px;
+        height: 30px;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 5px;
+        background: none;
+      }
+      > button {
+        padding: 5px;
+        cursor: pointer;
+        background: none;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      .join_button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: space-around;
+  opacity: 0;
+  pointer-events: none;
+  > button {
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+
+.active {
+  opacity: 1;
+  pointer-events: all;
+}
+

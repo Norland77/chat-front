@@ -13,6 +13,10 @@ class SocketApi {
         this.socket.on('joinedRoom', (data) => {
             console.log(data)
         })
+
+        this.socket.on('leftRoom', (data) => {
+            console.log(data)
+        })
     }
 }
 
