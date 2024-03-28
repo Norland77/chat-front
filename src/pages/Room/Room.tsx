@@ -35,6 +35,8 @@ const Room = () => {
     const [accept, {}] = chatAPI.useAcceptInviteMutation()
     const [inputKey, setInputKey] = useState(0);
     const [file, setFile] = useState<File>();
+    const [isOpenImg, setIsOpenImg] = useState(false);
+    const [imgName, setImgName] = useState('');
 
 
     useEffect(() => {
@@ -46,7 +48,7 @@ const Room = () => {
     }, [messages]);
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
-            messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+            messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight + 20;
         }
     };
 
@@ -127,6 +129,7 @@ const Room = () => {
             SocketApi.socket?.emit('sendFileInfo', {name: file.name, type: file.type});
             while (offset < fileSize) {
                 const chunk = file.slice(offset, offset + chunkSize);
+                console.log(chunk)
                 SocketApi.socket?.emit('uploadChunk', chunk);
                 offset += chunkSize;
             }
@@ -269,7 +272,25 @@ const Room = () => {
                                 {message.files.map(file => (
                                     <>
                                         {
-                                            file.mimetype.split('/')[0] === 'image' && <img src={`${file.path}`} alt={`${file.name}`}/>
+                                            file.mimetype.split('/')[0] === 'image' ?
+                                            <>
+                                                <img onClick={() => {
+                                                    setIsOpenImg(true);
+                                                    setImgName(file.name);
+                                                }} src={`${file.path}`} alt={`${file.name}`}/>
+                                                <div onClick={() => {
+                                                    setIsOpenImg(false);
+                                                    setImgName('');
+                                                }} style={isOpenImg && imgName === file.name ? {display: "flex"} : {}} className={styles.modal}>
+                                                    <img src={`${file.path}`} alt={`${file.name}`}/>
+                                                </div>
+                                            </> : file.mimetype.split('/')[0] === 'video' &&
+                                            <>
+                                                <video controls>
+                                                    <source src={`${file.path}`} type={`${file.mimetype}`}/>
+                                                 </video >
+                                            </>
+
                                         }
                                     </>
                                 ))}
