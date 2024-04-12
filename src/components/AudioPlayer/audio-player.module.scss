@@ -1,0 +1,56 @@
+.audioPlayer {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  > .right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    > div {
+      text-align: center;
+      > span {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.playerBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  > .playerBlock_main {
+    width: 100%;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  > div {
+    margin-right: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    > img {
+      width: 25px;
+    }
+  }
+}
+
+.progressBar {
+  background-color: #ccc;
+  height: 5px;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress {
+  background-color: #007bff;
+  height: 100%;
+}
