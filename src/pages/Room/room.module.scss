@@ -167,6 +167,24 @@
       }
       > img {
         width: 200px;
+        cursor: pointer;
+      }
+      > video {
+        width: 200px;
+      }
+      > .file_block {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        > .file {
+          width: 50px;
+          cursor: default;
+        }
+        > a {
+          color: black;
+          width: fit-content;
+        }
       }
     }
     &_right {
@@ -190,6 +208,20 @@
       }
       > video {
         width: 200px;
+      }
+      > .file_block {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        > .file {
+          width: 50px;
+          cursor: default;
+        }
+        > a {
+          color: black;
+          width: fit-content;
+        }
       }
     }
     &_input {
