@@ -4,6 +4,7 @@ import {IRoom} from "../../../interfaces/IChat";
 import {chatAPI} from "../../../services/ChatServices";
 import {useNavigate, useParams} from "react-router-dom";
 import SocketApi from "../../../api/socket-api";
+import ModalImage from "../../ModalImage/ModalImage";
 
 interface PropsType {
   room: IRoom | undefined
@@ -15,13 +16,17 @@ interface PropsType {
 
 const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsType) => {
   const [inviteLink, setInviteLink] = useState('');
+  const [isOpenImg, setIsOpenImg] = useState(false);
+  const [imgName, setImgName] = useState('');
   const [createInvite, {}] = chatAPI.useCreateInviteMutation();
   const [createPersonalRoom, {data: roomCreated}] = chatAPI.useCreatePersonalRoomMutation();
   const [leaveRoom, {}] = chatAPI.useLeaveRoomMutation();
   const {data: rooms} = chatAPI.useFetchAllRoomsQuery(accessToken)
+  const roomId = room?.id
+  const {data: images} = chatAPI.useGetAllImagesByRoomQuery({roomId, accessToken})
   const params = useParams();
   const navigate = useNavigate();
-
+  console.log(images);
   useEffect(() => {
     if (room && room.inviteLink) {
       setInviteLink(room.inviteLink);
@@ -121,6 +126,25 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
       {
         room && room.isPersonal && <button onClick={() => deleteRoomFunc()}>Delete chat</button>
       }
+      <h3 style={{marginTop: '20px'}}>Images</h3>
+      <div className={styles.image_grid}>
+        {
+          images && images.map(img => (
+            <>
+              <img onClick={() => {
+                setIsOpenImg(true);
+                setImgName(img.name);
+              }} src={`${img.path}`} alt={`${img.name}`}/>
+              <div onClick={() => {
+                setIsOpenImg(false);
+                setImgName('');
+              }} style={isOpenImg && imgName === img.name ? {display: "flex"} : {}} className={styles.modal}>
+                <ModalImage imageUrl={img.path} imageName={img.name} />
+              </div>
+            </>
+          ))
+        }
+      </div>
     </div>
   );
 };

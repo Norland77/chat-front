@@ -1,5 +1,15 @@
 import mainApi from "./mainApi";
-import {IInvite, IInviteCreate, IMessage, IPersonalRoomCreate, IRoom, IRoomCreate, IUser} from "../interfaces/IChat";
+import {
+    IFiles,
+    IInvite,
+    IInviteCreate,
+    IMessage,
+    IPersonalRoomCreate,
+    IRoom,
+    IRoomCreate,
+    IUser
+} from "../interfaces/IChat";
+import {IGetAllImages} from "../interfaces/IGetAllImages";
 
 const enchancedApi = mainApi.enhanceEndpoints({
     addTagTypes: ['Chat', 'Messages', 'Room'],
@@ -131,6 +141,15 @@ export const chatAPI = enchancedApi.injectEndpoints({
                 }
             }),
             invalidatesTags: ['Chat']
+        }),
+        getAllImagesByRoom: build.query<IFiles[], IGetAllImages>({
+            query: (dto: IGetAllImages) => ({
+                url: `/message/images/${dto.roomId}`,
+                headers: {
+                    Authorization: `Bearer ${dto.accessToken}`,
+                }
+            }),
+            providesTags: ['Chat']
         }),
     })
 })

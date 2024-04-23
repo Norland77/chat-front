@@ -9,6 +9,24 @@
     gap: 5px;
     > div {
       text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      > img {
+        width: 25px;
+      }
+      > input[type="range"] {
+        opacity: 0;
+        pointer-events: none;
+        transition-duration: .3s;
+        -webkit-appearance: none;
+        border-radius: 5px;
+      }
+      > .show[type="range"] {
+        opacity: 1;
+        pointer-events: all;
+        transition-duration: .3s;
+      }
       > span {
         font-size: 16px;
         font-weight: bold;
@@ -25,6 +43,8 @@
   justify-content: space-between;
   > .playerBlock_main {
     width: 100%;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -32,7 +52,6 @@
   display: flex;
   align-items: center;
   > div {
-    margin-right: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -53,4 +72,29 @@
 .progress {
   background-color: #007bff;
   height: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #3c426a;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: #3c426a;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 10px;
+  height: 10px;
+  background: #3c426a;
+  border-radius: 50%;
+  cursor: pointer;
 }

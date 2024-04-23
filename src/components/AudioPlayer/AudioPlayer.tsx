@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styles from './audio-player.module.scss'
-import pause from '../../img/paus.svg'
-import play from '../../img/play.svg'
+import styles from './audio-player.module.scss';
+import pause from '../../img/paus.svg';
+import play from '../../img/play.svg';
+import volumeIcon from '../../img/volume.svg';
 
 interface AudioPlayerProps {
   src: string;
@@ -11,11 +12,13 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, name }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  const volumeRef = useRef<HTMLInputElement>(null); // Add volume input ref
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
+  const [show, isShow] = useState(false);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -50,6 +53,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, name }) => {
 
   const handleSeekMouseUp = () => {
     setIsSeeking(false);
+  };
+
+  const handleVolumeChange = () => {
+    if (audioRef.current && volumeRef.current) {
+      audioRef.current.volume = parseFloat(volumeRef.current.value);
+    }
   };
 
   useEffect(() => {
@@ -88,6 +97,24 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, name }) => {
       <audio ref={audioRef} src={src} />
 
       <div className={styles.right}>
+        <div
+          onMouseEnter={ () => isShow(true)}
+          onMouseLeave={ () => isShow(false)}
+        >
+          <img
+            src={volumeIcon}
+            alt="volume" />
+          <input
+            ref={volumeRef}
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            defaultValue="1"
+            onChange={handleVolumeChange}
+            className={ show ? styles.show : ''}
+          />
+        </div>
         <div className={styles.playerBlock}>
           <div className={styles.playerBlock_main}>
             <div
@@ -110,6 +137,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, name }) => {
             </div>
           </div>
         </div>
+
         <div>
           <span>{name}</span>
         </div>
