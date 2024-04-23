@@ -15,6 +15,8 @@ import RoomCreate from "./pages/RoomCreate/RoomCreate";
 import InvitePage from "./pages/InvitePage/InvitePage";
 import {authAPI} from "./services/AuthServices";
 import UsersPage from "./pages/UsersPage/UsersPage";
+import Profile from "./pages/Profile/Profile";
+import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
 
 function App() {
   const { accessToken } = useAppSelector(state => state.userReducer)
@@ -47,6 +49,8 @@ function App() {
                 </ProtectedRoute>
             }/>
             <Route path={"/home/users"} element={<UsersPage />}/>
+            <Route path={"/home/profile"} element={<Profile />}/>
+            <Route path={"/home/profile/edit"} element={<ProfileEdit />}/>
         </Route>
       </Route>
   ))

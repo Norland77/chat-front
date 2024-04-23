@@ -120,7 +120,7 @@
     }
   }
   &_msgArea {
-    max-height: 750px;
+    max-height: 700px;
     overflow-y: auto;
     margin: 20px 0;
     display: flex;
@@ -387,3 +387,12 @@
   }
 }
 
+.emojiOpen {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.emojiClose {
+  opacity: 0;
+  pointer-events: none;
+}

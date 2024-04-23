@@ -38,6 +38,7 @@ const Header = () => {
             <div className={`${styles.modal} ${isOpen && styles.active}`}>
                 <Link onClick={() => setOpen(false)} to={'/home/room-create'}>Create Chat</Link>
                 <Link onClick={() => setOpen(false)} to={'/home/users'}>Show all users</Link>
+                <Link onClick={() => setOpen(false)} to={'/home/profile'}>Profile</Link>
             </div>
         </div>
     );

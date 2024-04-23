@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { chatAPI } from "../../../services/ChatServices";
 import paperclip from '../../../img/paperclip.svg'
 import sendIcon from '../../../img/send.svg'
+import emojiIcon from '../../../img/emoji.svg'
+import EmojiPicker from "emoji-picker-react";
 
 interface PropsType {
   isUserExist: boolean
@@ -24,6 +26,7 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
   const [refetchRoom, {}] = chatAPI.useRefetchRoomMutation();
   const [files, setFiles] = useState<File[]>([]);
   const [text, setText] = useState('');
+  const [isEmojiOpen, setIsEmojiOpen] = useState(false);
   const [inputKey, setInputKey] = useState(0);
   const params = useParams();
 
@@ -92,15 +95,33 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
       <div className={styles.room_body_input}>
         {
           isUserExist ? <>
-            <input className={styles.msg_input} placeholder={'Type message...'} type="text" value={isEdit ? editMsg : text} onChange={isEdit ? (e) => {
+            <input className={styles.msg_input}
+                   placeholder={'Type message...'}
+                   type="text"
+                   value={isEdit ? editMsg : text}
+                   onChange={isEdit ? (e) => {
               setEditMsg(e.target.value);
             } : (e) => {
               setText(e.target.value);
-            }} onKeyPress={handleKeyPress}/>
+            }} onKeyPress={handleKeyPress}
+                   onClick={() => {setIsEmojiOpen(false)}}
+            />
             <label htmlFor="file-upload">
               <img src={paperclip} alt="paperclip"/>
             </label>
             <input type="file" id="file-upload" multiple onChange={handleFileChange} key={inputKey} style={{ display: 'none' }} />
+            <div style={{position: 'relative', display: 'flex'}}>
+              <button style={{border: 'none', background: 'none', cursor: 'pointer'}} onClick={() => {setIsEmojiOpen(!isEmojiOpen)}}>
+                <img style={{width: '25px'}} src={emojiIcon} alt="emoji"/>
+              </button>
+              <EmojiPicker
+                className={ isEmojiOpen ? styles.emojiOpen : styles.emojiClose}
+                style={{position: 'absolute', bottom: '100%', right: '0'}}
+                reactionsDefaultOpen={false}
+                onEmojiClick={ (s) => {
+                setText(prevState => prevState + s.emoji)
+              }} />
+            </div>
             <button onClick={isEdit ? () => updateMessageFunc() : () => sendMessage()}>
               {isEdit ? "Edit" : "Send"}
               <img src={sendIcon} alt="send"/>

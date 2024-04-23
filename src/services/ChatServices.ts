@@ -7,7 +7,7 @@ import {
     IPersonalRoomCreate,
     IRoom,
     IRoomCreate,
-    IUser
+    IUser, IUserEdit
 } from "../interfaces/IChat";
 import {IGetAllImages} from "../interfaces/IGetAllImages";
 
@@ -128,6 +128,24 @@ export const chatAPI = enchancedApi.injectEndpoints({
                 url: `/user/all`,
                 headers: {
                     Authorization: `Bearer ${token}`,
+                }
+            }),
+        }),
+        getUserById: build.query<IUser, {accessToken: string, id: string}>({
+            query: ({accessToken, id}: {accessToken: string, id: string}) => ({
+                url: `/user/${id}`,
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            }),
+        }),
+        editUserById: build.mutation<IUser, {accessToken: string, dto: IUserEdit}>({
+            query: ({accessToken, dto}: {accessToken: string, dto: IUserEdit}) => ({
+                url: `/user/${dto.id}`,
+                method: 'PUT',
+                body: dto,
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
                 }
             }),
         }),

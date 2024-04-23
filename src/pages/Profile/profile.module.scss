@@ -1,0 +1,43 @@
+.body {
+  display: flex;
+  gap: 50px;
+  padding: 15px;
+}
+
+.avatarNone {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #5F5F5F;
+}
+
+.info {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  > span {
+    font-size: 18px;
+    font-weight: normal;
+    color: #717171;
+  }
+}
+
+.buttonsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  > .button {
+    color: #5F5F5F;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px 15px;
+    border: 1px solid #5F5F5F;
+    border-radius: 5px;
+    transition-duration: 0.3s;
+    &:hover {
+      background-color: rgba(0, 163, 255, 0.2);
+      transition-duration: 0.3s;
+    }
+  }
+}

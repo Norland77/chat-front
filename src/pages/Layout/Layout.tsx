@@ -5,14 +5,13 @@ import {type FC} from 'react'
 import {useConnectSocket} from "../../hooks/useConnectSocket";
 import Rooms from "../Rooms/Rooms";
 import {useAppSelector} from "../../hooks/redux";
-import Footer from "../Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 const Layout: FC = () => {
     useConnectSocket();
   return (
     <div className={styles.layout}>
       <Header />
       <Outlet />
-      <Footer />
     </div>
   )
 }
