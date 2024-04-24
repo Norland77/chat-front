@@ -10,6 +10,17 @@
     text-decoration: none;
     color: black;
     transition-duration: .3s;
+    > svg {
+      > path {
+        transition-duration: .3s;
+      }
+      &:hover {
+        > path {
+          stroke: rgba(0, 163, 255, 0.2);
+          transition-duration: .3s;
+        }
+      }
+    }
     &:hover {
       color: #878790;
       transition-duration: .3s;
