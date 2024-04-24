@@ -25,6 +25,8 @@ export interface IRoom {
     isPrivate: boolean
     isPersonal: boolean
     inviteLink: string
+    firstUserId?: string;
+    secondUserId?: string;
     messages: IMessage[]
     users: IUser[]
 }
@@ -64,7 +66,6 @@ export interface IUserEdit {
     phone_number?: string;
     email?: string;
     description?: string;
-    avatar_url?: string
 }
 
 export interface IInvite {

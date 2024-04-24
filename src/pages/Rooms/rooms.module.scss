@@ -42,13 +42,15 @@
     }
     > .room {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       text-align: left;
       align-items: start;
       width: 100%;
       height: 80px;
-      justify-content: space-between;
+      //justify-content: space-between;
+      align-items: center;
       font-size: 22px;
+      gap: 10px;
       font-weight: bold;
       /*border-radius: 5px;*/
       cursor: pointer;
@@ -65,53 +67,57 @@
         transition-duration: .3s;
       }
       > div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         width: 100%;
-        > .room_name {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        > div {
           display: flex;
-          flex-direction: row-reverse;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          > .room_name {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 5px;
+            justify-content: flex-end;
+            > img {
+              width: 12%;
+            }
+            > p {
+              font-size: 18px;
+              font-weight: normal;
+              color: #717171;
+            }
+          }
+          > span {
+            font-weight: initial;
+            font-size: 14px;
+            color: #A0A0A0;
+          }
+        }
+        > .room_msg {
+          display: flex;
           gap: 5px;
-          justify-content: flex-end;
-          > img {
-            width: 12%;
-          }
+          margin-top: 15px;
+          flex: 1;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 100%;
+          justify-content: left;
           > p {
-            font-size: 18px;
             font-weight: normal;
-            color: #717171;
+            font-size: 16px;
+            color: #5F5F5F;
+          }
+          > span {
+            font-weight: normal;
+            font-size: 16px;
+            color: #5F5F5F;
           }
         }
-        > span {
-          font-weight: initial;
-          font-size: 14px;
-          color: #A0A0A0;
-        }
       }
-
-      > .room_msg {
-        display: flex;
-        gap: 5px;
-        margin-top: 15px;
-        flex: 1;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        width: 100%;
-        justify-content: left;
-        > p {
-          font-weight: normal;
-          font-size: 16px;
-          color: #5F5F5F;
-        }
-        > span {
-          font-weight: normal;
-          font-size: 16px;
-          color: #5F5F5F;
-        }
-      }
-
     }
   }
   > div {

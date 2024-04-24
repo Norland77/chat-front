@@ -26,7 +26,11 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
   const {data: images} = chatAPI.useGetAllImagesByRoomQuery({roomId, accessToken})
   const params = useParams();
   const navigate = useNavigate();
-  console.log(images);
+
+  const userId = room && room.firstUserId === id ? room.secondUserId : room && room.firstUserId;
+
+  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId})
+
   useEffect(() => {
     if (room && room.inviteLink) {
       setInviteLink(room.inviteLink);
@@ -90,7 +94,23 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
     <div className={styles.sidebar}>
       {
         room && room.isPersonal ?
-          <h2>{room && room.name.split(",")[0] === username ? room.name.split(",")[1] : room.name.split(",")[0]}</h2> :
+          <div className={styles.sidebar_userInfo}>
+            <img src={user?.avatar_url} alt="avatar"/>
+            <h2>{user?.username}</h2>
+            <span>User Info</span>
+            <div>
+              <span>{user?.phone_number}</span>
+              <span className={styles.sidebar_userInfo_subtitle}>Phone number</span>
+            </div>
+            <div>
+              <span>{user?.email}</span>
+              <span className={styles.sidebar_userInfo_subtitle}>Email</span>
+            </div>
+            <div>
+              <span>{user?.description}</span>
+              <span className={styles.sidebar_userInfo_subtitle}>Description</span>
+            </div>
+          </div> :
           <h2>{room && room.name}</h2>
       }
       {
@@ -122,9 +142,6 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
       {
         room && !room.isPersonal && room.ownerId !== id &&
           <button onClick={() => leave()}>Leave from Room</button>
-      }
-      {
-        room && room.isPersonal && <button onClick={() => deleteRoomFunc()}>Delete chat</button>
       }
       <h3 style={{marginTop: '20px'}}>Images</h3>
       <div className={styles.image_grid}>

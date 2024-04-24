@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 interface PropsType {
-  imageUrl: string
+  imageUrl: string | undefined
   imageName: string
 }
 
@@ -10,7 +10,9 @@ const ModalImage = ({ imageUrl, imageName }: PropsType) => {
 
   useEffect(() => {
     const img = new Image();
-    img.src = imageUrl;
+    if (typeof imageUrl === "string") {
+      img.src = imageUrl;
+    }
     img.onload = () => {
       const maxWidth = window.innerWidth;
       const maxHeight = window.innerHeight;

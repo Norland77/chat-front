@@ -131,8 +131,16 @@ export const chatAPI = enchancedApi.injectEndpoints({
                 }
             }),
         }),
-        getUserById: build.query<IUser, {accessToken: string, id: string}>({
-            query: ({accessToken, id}: {accessToken: string, id: string}) => ({
+        getUserById: build.query<IUser, {accessToken: string, id: string | undefined}>({
+            query: ({accessToken, id}: {accessToken: string, id: string | undefined}) => ({
+                url: `/user/${id}`,
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            }),
+        }),
+        getUserByIdMutation: build.mutation<IUser, {accessToken: string, id: string | undefined}>({
+            query: ({accessToken, id}: {accessToken: string, id: string | undefined}) => ({
                 url: `/user/${id}`,
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
