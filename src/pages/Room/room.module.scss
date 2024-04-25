@@ -8,7 +8,7 @@
 .sidebar {
   width: 15%;
   border: 1px solid #DFDFDF;
-  padding: 10px;
+  /*padding: 10px;*/
   /*border-radius: 5px;*/
   border-left: none;
   display: flex;
@@ -41,40 +41,74 @@
       gap: 5px;
       padding: 20px 0;
       margin: 20px 0;
-      border-bottom: 1px solid gray;
-      border-top: 1px solid gray;
       > input {
         width: 100%;
-        border: 1px solid black;
-        border-radius: 5px;
+        border: none;
+        border-bottom: 1px solid #515151;
         padding: 2px;
+        background: none;
+        &:focus-visible {
+          outline: none;
+        }
       }
       > button {
-        background: none;
-        border: 1px solid black;
+        border: none;
         border-radius: 5px;
         cursor: pointer;
+        background-color: #00A3FF;
+        padding: 5px 10px;
+        color: #FFFFFF;
+        margin: 0 10px;
       }
     }
     .sidebar_users {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      //gap: 5px;
       &_user {
         display: flex;
         gap: 5px;
-        > button {
-          border: black solid 1px;
-          border-radius: 5px;
-          background: none;
+        transition-duration: .3s;
+        padding: 5px 10px;
+        &:hover {
+          background-color: rgba(0, 163, 255, 0.2);
+          transition-duration: .3s;
+        }
+        > span {
+          display: flex;
+          width: 50px;
           cursor: pointer;
+          font-size: 12px;
+          border-bottom: solid 1px #ec6069;
+          align-items: flex-end;
+          color: #ec6069;
         }
         > div {
           width: 100%;
           padding: 5px;
-          border: 1px solid black;
           border-radius: 5px;
           cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          > img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+          }
+          > div {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            > .role {
+              font-size: 12px;
+              font-weight: lighter;
+              color: #00A3FF;
+            }
+            > .name {
+              font-size: 18px;
+            }
+          }
           > button {
             padding: 2px;
             border: 1px solid black;
@@ -191,9 +225,8 @@
     }
   }
   &_msgArea {
-    max-height: 700px;
+    max-height: 698px;
     overflow-y: auto;
-    margin: 20px 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -386,6 +419,9 @@
         border-radius: 5px;
         background: none;
         font-size: 24px;
+        &:focus-visible {
+          outline: none;
+        }
         &::placeholder {
           color: #A0A0A0;
         }
@@ -475,10 +511,23 @@
   justify-content: center;
   text-align: center;
   align-items: center;
+  padding: 10px;
   > img {
     border-radius: 50%;
     width: 100px;
     height: 100px;
+  }
+  > .avatarNone {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: #515151;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFFFFF;
   }
   > div {
     display: flex;

@@ -31,7 +31,7 @@ const Rooms = () => {
                         joinToRoom(room.id)
                     }} className={`${room.id === params.Id && styles.active} ${styles.room}`}>
                         {
-                          room.isPersonal && <Avatar room={room}/>
+                          <Avatar height={'80%'} width={'20%'} room={room}/>
                         }
                         <div>
                             <div>

@@ -1,5 +1,12 @@
 .avatar {
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+}
+
+.avatarNone {
+  border-radius: 50%;
+  background-color: #515151;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

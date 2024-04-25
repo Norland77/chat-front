@@ -42,7 +42,6 @@ function App() {
                 <Home />
             </ProtectedRoute>
         }>
-            <Route path={"/home/room-create"} element={<RoomCreate />}/>
             <Route path={"/home/room/:Id"} element={
                 <ProtectedRoute isError={isError} isLoading={isLoading} user={accessToken} redirectPath={"/login"}>
                     <Room />

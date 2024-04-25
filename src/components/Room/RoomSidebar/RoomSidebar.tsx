@@ -5,6 +5,7 @@ import {chatAPI} from "../../../services/ChatServices";
 import {useNavigate, useParams} from "react-router-dom";
 import SocketApi from "../../../api/socket-api";
 import ModalImage from "../../ModalImage/ModalImage";
+import Avatar from "../../Rooms/Avatar/Avatar";
 
 interface PropsType {
   room: IRoom | undefined
@@ -79,12 +80,6 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
     }
   }
 
-  const leave = () => {
-    leaveRoom({roomId: params.Id ? params.Id: "", userId: id, token: accessToken});
-
-    return navigate('/home');
-  }
-
   const kick = (id: string) => {
     leaveRoom({roomId: params.Id ? params.Id: "", userId: id, token: accessToken})
     SocketApi.socket?.emit('kickUser', { roomId: params.Id });
@@ -111,37 +106,50 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
               <span className={styles.sidebar_userInfo_subtitle}>Description</span>
             </div>
           </div> :
-          <h2>{room && room.name}</h2>
+          <div className={styles.sidebar_userInfo}>
+            {
+              room?.avatar_url ? <img src={room?.avatar_url} alt="avatar"/> : <div className={styles.avatarNone}>{room?.name[0]}</div>
+            }
+            <h2>{room?.name}</h2>
+            <span>Chat Info</span>
+            <div>
+              <span>Test desc</span>
+              <span className={styles.sidebar_userInfo_subtitle}>Description</span>
+            </div>
+          </div>
       }
       {
         room && !room.isPersonal && <div>
               <div className={styles.sidebar_invite}>
                   <input type="text" readOnly value={inviteLink}/>
-                  <button style={{display: inviteLink !== '' ? "none" : "block"}}
-                          onClick={() => generateLink()}>Generate invite link
-                  </button>
+                {
+                  room.ownerId === id &&
+                    <button style={{display: inviteLink !== '' ? "none" : "block"}}
+                            onClick={() => generateLink()}>Generate invite link
+                    </button>
+                }
               </div>
               <div className={styles.sidebar_users}>
+                  <h3>User list</h3>
                 {room && room.users?.map(user => (
                   <div className={styles.sidebar_users_user}>
                     <div onClick={() => createRoom(user.username, user.id)} key={user.id}>
-                      {user.username} {room && room.ownerId === user.id &&
-                        <span>(Owner)</span>
-                    }
+                      <img src={user.avatar_url} alt="avatar"/>
+                      <div>
+                        <span className={styles.name}>{user.username}</span>
+                        {room && room.ownerId === user.id &&
+                          <span className={styles.role}>Admin</span>}
+                      </div>
                     </div>
                     {
                       room && room.ownerId === id && room.ownerId !== user.id &&
-                        <button onClick={() => kick(user.id)}>kick out</button>
+                        <span onClick={() => kick(user.id)}>kick out</span>
                     }
                   </div>
 
                 ))}
               </div>
           </div>
-      }
-      {
-        room && !room.isPersonal && room.ownerId !== id &&
-          <button onClick={() => leave()}>Leave from Room</button>
       }
       <h3 style={{marginTop: '20px'}}>Images</h3>
       <div className={styles.image_grid}>
