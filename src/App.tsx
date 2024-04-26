@@ -11,10 +11,10 @@ import {setId, setName, setToken} from "./store/reducers/UserSlice";
 import {IUser} from "./interfaces/IChat";
 import {jwtDecode} from "jwt-decode";
 import Home from "./pages/Home/Home";
-import RoomCreate from "./pages/RoomCreate/RoomCreate";
+import RoomCreateModal from "./components/RoomCreateModal/RoomCreateModal";
 import InvitePage from "./pages/InvitePage/InvitePage";
 import {authAPI} from "./services/AuthServices";
-import UsersPage from "./pages/UsersPage/UsersPage";
+import UsersListModal from "./components/UsersListModal/UsersListModal";
 import Profile from "./pages/Profile/Profile";
 import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
 
@@ -47,9 +47,7 @@ function App() {
                     <Room />
                 </ProtectedRoute>
             }/>
-            <Route path={"/home/users"} element={<UsersPage />}/>
             <Route path={"/home/profile"} element={<Profile />}/>
-            <Route path={"/home/profile/edit"} element={<ProfileEdit />}/>
         </Route>
       </Route>
   ))

@@ -29,6 +29,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5px;
+    padding: 10px;
     > img {
       width: 100%;
       cursor: pointer;
@@ -70,6 +71,9 @@
         gap: 5px;
         transition-duration: .3s;
         padding: 5px 10px;
+        &:last-child {
+          align-items: flex-end;
+        }
         &:hover {
           background-color: rgba(0, 163, 255, 0.2);
           transition-duration: .3s;
@@ -77,6 +81,7 @@
         > span {
           display: flex;
           width: 50px;
+          height: fit-content;
           cursor: pointer;
           font-size: 12px;
           border-bottom: solid 1px #ec6069;
@@ -304,6 +309,7 @@
         background-color: #FFFFFF;
         border-radius: 0 14px 14px 14px;
         padding: 10px 18px;
+        max-width: 800px;
         > div {
           color: #515151;
           font-size: 18px;
@@ -341,7 +347,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      //min-width: 300px;
+      max-width: 600px;
       > .msg_header {
         align-items: center;
       }
@@ -413,12 +419,14 @@
       }
       > .msg_input {
         padding: 5px;
+        height: 40px;
         width: 100%;
         border: none;
         /*border: 1px solid black;*/
         border-radius: 5px;
         background: none;
         font-size: 24px;
+        resize: none;
         &:focus-visible {
           outline: none;
         }

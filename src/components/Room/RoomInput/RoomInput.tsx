@@ -72,7 +72,7 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
     setEditMsg('');
   }
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter') {
       if (isEdit) {
         updateMessageFunc();
@@ -95,9 +95,9 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
       <div className={styles.room_body_input}>
         {
           isUserExist ? <>
-            <input className={styles.msg_input}
+            <textarea className={styles.msg_input}
                    placeholder={'Type message...'}
-                   type="text"
+                   /*type="text"*/
                    value={isEdit ? editMsg : text}
                    onChange={isEdit ? (e) => {
               setEditMsg(e.target.value);

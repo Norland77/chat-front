@@ -1,11 +1,69 @@
 .body {
+  background-color: #FFFFFF;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  > input {
-    width: 30%;
+  flex-direction: row-reverse;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  > .inputsBlock {
+    display: flex;
+    flex-direction: column;
+    > input {
+      width: 100%;
+      padding: 2px 5px;
+      border: none;
+      border-bottom: solid 1px #515151;
+      font-size: 18px;
+      color: #515151;
+      &:focus-visible {
+        outline: none;
+      }
+    }
   }
-  > button {
-    width: 30%;
+  > div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    > div {
+      .ava_label {
+        width: 50px;
+        height: 50px;
+        background-color: #515151;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+      }
+    }
+    > button {
+      width: 100%;
+      padding: 5px;
+      border: none;
+      background-color: #00A3FF;
+      color: #FFFFFF;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   }
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }

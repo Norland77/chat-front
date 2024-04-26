@@ -12,7 +12,7 @@ import {
 import {IGetAllImages} from "../interfaces/IGetAllImages";
 
 const enchancedApi = mainApi.enhanceEndpoints({
-    addTagTypes: ['Chat', 'Messages', 'Room'],
+    addTagTypes: ['Chat', 'Messages', 'Room', 'User'],
 })
 
 export const chatAPI = enchancedApi.injectEndpoints({
@@ -138,6 +138,7 @@ export const chatAPI = enchancedApi.injectEndpoints({
                     Authorization: `Bearer ${accessToken}`,
                 }
             }),
+            providesTags: ['User']
         }),
         getUserByIdMutation: build.mutation<IUser, {accessToken: string, id: string | undefined}>({
             query: ({accessToken, id}: {accessToken: string, id: string | undefined}) => ({
@@ -156,6 +157,17 @@ export const chatAPI = enchancedApi.injectEndpoints({
                     Authorization: `Bearer ${accessToken}`,
                 }
             }),
+            invalidatesTags: ['User']
+        }),
+        fetchUser: build.mutation<IUser, {accessToken: string, id: string}>({
+            query: ({accessToken, id}: {accessToken: string, id: string}) => ({
+                url: `/user/${id}`,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            }),
+            invalidatesTags: ['User']
         }),
         createPersonalRoom: build.mutation<IRoom, IPersonalRoomCreate>({
             query: (dto: IPersonalRoomCreate) => ({

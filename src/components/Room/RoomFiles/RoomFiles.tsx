@@ -14,7 +14,7 @@ const RoomFiles = ({message}: PropsType) => {
   const [imgName, setImgName] = useState('');
   return (
     <>
-      {message.files.map(file => (
+      {message && message?.files?.map(file => (
         <>
           {
             file.path !== "" &&

@@ -7,7 +7,8 @@ import {useState} from "react";
 import {chatAPI} from "../../services/ChatServices";
 import personsIcon from '../../img/createChat.svg';
 import profileIcon from '../../img/profile.svg';
-import RoomCreate from "../../pages/RoomCreate/RoomCreate";
+import RoomCreateModal from "../RoomCreateModal/RoomCreateModal";
+import UsersListModal from "../UsersListModal/UsersListModal";
 const Header = () => {
     const {username, accessToken, id} = useAppSelector(state => state.userReducer)
     const [logout, {}] = authAPI.useLogoutMutation()
@@ -16,6 +17,7 @@ const Header = () => {
     const navigate = useNavigate()
     const [isOpen, setOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
     const logoutFunc = () => {
         logout(null);
         dispatch(setName(''));
@@ -60,14 +62,18 @@ const Header = () => {
                       }} to={'#'}> <img src={personsIcon} alt="create chat"/> Create Chat</Link>
                   </div>
                   <div className={styles.link}>
-                      <Link onClick={() => setOpen(false)} to={'/home/users'}> <img src={personsIcon} alt="all users"/> Show all users</Link>
+                      <Link onClick={() => {
+                          setOpen(false);
+                          setIsUsersModalOpen(true);
+                      }} to={'#'}> <img src={personsIcon} alt="all users"/> Show all users</Link>
                   </div>
                   <div className={styles.link}>
                       <Link onClick={() => setOpen(false)} to={'/home/profile'}> <img src={profileIcon} alt="profile"/> Profile</Link>
                   </div>
               </div>
           </div>
-          <RoomCreate isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>
+          <RoomCreateModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>
+          <UsersListModal isOpen={isUsersModalOpen} setIsOpen={setIsUsersModalOpen} />
       </>
     );
 };

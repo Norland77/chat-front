@@ -1,4 +1,4 @@
-import styles from './room-create.module.scss'
+import styles from './room-create-modal.module.scss'
 import {chatAPI} from "../../services/ChatServices";
 import {useAppSelector} from "../../hooks/redux";
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
@@ -13,7 +13,7 @@ interface PropsType {
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const RoomCreate = ({isOpen, setIsOpen}: PropsType) => {
+const RoomCreateModal = ({isOpen, setIsOpen}: PropsType) => {
     const [text, setText] = useState('')
     const [isPrivate, setIsPrivate] = useState(false)
     const {accessToken, id} = useAppSelector(state => state.userReducer)
@@ -35,6 +35,7 @@ const RoomCreate = ({isOpen, setIsOpen}: PropsType) => {
       }
       SocketApi.socket?.emit('chatToServerCreateChat', {file: {name: selectedImage.name, mimetype: selectedImage.type}, userId: id, name: text, isPrivate: isPrivate});
     }
+    SocketApi.socket?.emit('chatToServerCreateChat', {userId: id, name: text, isPrivate: isPrivate});
     clearInputs();
     setInputKey(inputKey2 + 1);
     setIsOpen(false);
@@ -108,4 +109,4 @@ const RoomCreate = ({isOpen, setIsOpen}: PropsType) => {
     );
 };
 
-export default RoomCreate;
+export default RoomCreateModal;

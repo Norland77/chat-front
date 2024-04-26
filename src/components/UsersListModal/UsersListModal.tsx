@@ -1,10 +1,15 @@
 import {chatAPI} from "../../services/ChatServices";
 import {useAppSelector} from "../../hooks/redux";
-import styles from './users-page.module.scss'
+import styles from './users-list-modal.module.scss'
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import React, {Dispatch, SetStateAction, useEffect} from "react";
 
-const UsersPage = () => {
+interface PropsType {
+    isOpen: boolean
+    setIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const UsersListModal = ({isOpen, setIsOpen}: PropsType) => {
     const {accessToken, id, username} = useAppSelector(state => state.userReducer)
     const {data: users} = chatAPI.useGetAllUsersQuery({token: accessToken})
     const [createPersonalRoom, {data: room}] = chatAPI.useCreatePersonalRoomMutation();
@@ -38,19 +43,31 @@ const UsersPage = () => {
             return navigate(`/home/room/${room && room.id}`);
     }, [room]);
 
-    return (
-        <div className={styles.usersPage}>
-            <h1>Users</h1>
-            <div className={styles.body}>
-                {users && users.map(user => (
-                    <div key={user.id} onClick={() => createRoom(user.username, user.id)} className={styles.body__card}>
-                        {user.username} {user.username === username && '(You)'}
-                    </div>
-                ))}
-            </div>
-        </div>
+    const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (event.target !== event.currentTarget) {
+            event.stopPropagation();
+        } else {
+            setIsOpen(false);
+        }
+    };
 
+    console.log(users)
+
+    return (
+      <div onClick={(e) => handleOverlayClick(e)} className={styles.overlay} style={ isOpen ? {display: "flex"} : {display: 'none'}}>
+          <div className={styles.usersPage}>
+              <h1>Users</h1>
+              <div className={styles.body}>
+                  {users && users.map(user => (
+                    <div key={user.id} onClick={() => createRoom(user.username, user.id)} className={styles.body__card}>
+                        {user.avatar_url ? <img src={user.avatar_url} alt="avatar"/> : <div></div>}
+                        <span>{user.username} {user.username === username && '(You)'}</span>
+                    </div>
+                  ))}
+              </div>
+          </div>
+      </div>
     );
 };
 
-export default UsersPage;
+export default UsersListModal;
