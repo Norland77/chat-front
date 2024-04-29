@@ -5,6 +5,7 @@ export interface IMessage {
     userId: string;
     roomId: string;
     files: IFiles[];
+    User: IUser;
     createdAt: Date;
     updatedAt: Date;
 }

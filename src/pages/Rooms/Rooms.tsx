@@ -5,7 +5,6 @@ import SocketApi from "../../api/socket-api";
 import { useAppSelector } from "../../hooks/redux";
 import { Link, useParams } from "react-router-dom";
 import groupChat from '../../img/groupChat.svg';
-import {IRoom, IUser} from "../../interfaces/IChat";
 import Avatar from "../../components/Rooms/Avatar/Avatar";
 
 const Rooms = () => {
@@ -64,9 +63,28 @@ const Rooms = () => {
                               !room.isPersonal && <span>{room.messages.length > 0 && `${room.messages[room.messages.length - 1].username}:`}</span>
                             }
                             {
-                                room.messages.length > 0 && room.messages[room.messages.length - 1].text !== '' ?
-                                  <p>{ room.messages[room.messages.length - 1].text }</p> : room.messages.length > 0 && room.messages[room.messages.length - 1].text === '' ?
-                                    <p>Files</p> : <></>
+                                room.messages.length > 0 && room.messages[room.messages.length - 1].text !== '' && room.messages[room.messages.length - 1].files[0].path === '' ?
+                                  <p>{ room.messages[room.messages.length - 1].text }</p>
+                                   : room.messages.length > 0 && room.messages[room.messages.length - 1].text === '' ?
+                                  <>
+                                      {
+                                          room.messages[room.messages.length - 1].files?.map(img => (
+                                            <img src={img.path} alt={img.name} />
+                                          ))
+                                      }
+                                  </> : room.messages.length > 0 && room.messages[room.messages.length - 1].text !== '' && room.messages[room.messages.length - 1].files.length > 0 ? <>
+                                        {
+                                            <>
+                                                {
+                                                    room.messages[room.messages.length - 1].files?.map(img => (
+                                                      <img src={img.path} alt={img.name} />
+                                                    ))
+                                                }
+                                                <p>{ room.messages[room.messages.length - 1].text }</p>
+                                            </>
+
+                                        }
+                                    </> : <></>
                             }
                         </div>
                     </div>

@@ -13,7 +13,7 @@ const RoomFiles = ({message}: PropsType) => {
   const [isOpenImg, setIsOpenImg] = useState(false);
   const [imgName, setImgName] = useState('');
   return (
-    <>
+    <div className={styles.filesGrid}>
       {message && message?.files?.map(file => (
         <>
           {
@@ -48,7 +48,7 @@ const RoomFiles = ({message}: PropsType) => {
           }
         </>
       ))}
-    </>
+    </div>
   );
 };
 

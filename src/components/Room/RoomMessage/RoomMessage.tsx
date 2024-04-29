@@ -32,25 +32,35 @@ const RoomMessage = ({message, id, isUserExist, editMessage}: PropsType) => {
     <div key={message.id}
          onClick={() => setShow(!show)}
          className={message.userId === id ? styles.room_body_right : styles.room_body_left}>
-      <div className={styles.msg_header}>
-        <span className={styles.name}>{message.username}</span>
-        <span className={styles.time}>{message.updatedAt === message.createdAt ? formatTime(message.createdAt) : `${formatTime(message.createdAt)} (edit at ${formatTime(message.updatedAt)})`}</span>
-      </div>
-      <div className={styles.msq_body}>
-        <div dangerouslySetInnerHTML={{
-          __html: message.text?.replace(urlRegex, (url) => (
-            `<a href="${url}">${url}</a>`
-          ))
-        }}/>
-        <RoomFiles message={message} />
-        <div className={styles.room_body_msgDown}>
+      <div>
+        <div className={styles.avatarBlock}>
+          <img src={message.User?.avatar_url} alt="avatar"/>
+        </div>
+        <div>
+          <div className={styles.msg_header}>
+            <span className={styles.name}>{message.username}</span>
+            <span className={styles.time}>{message.updatedAt === message.createdAt ? formatTime(message.createdAt) : `${formatTime(message.createdAt)} (edit at ${formatTime(message.updatedAt)})`}</span>
+          </div>
+          <div className={styles.msq_body}>
+            <div>
+              <div dangerouslySetInnerHTML={{
+                __html: message.text?.replace(urlRegex, (url) => (
+                  `<a href="${url}">${url}</a>`
+                ))
+              }}/>
+            </div>
 
-          {
-            message.userId === id && isUserExist && <>
-                  <span onClick={() => deleteMessageFunc(message.id, message.roomId)} className={styles.btn}>delete</span>
-                  <span onClick={() => editMessage(message.id, message.text)} className={styles.btn}>edit</span>
-              </>
-          }
+            <RoomFiles message={message} />
+            <div className={styles.room_body_msgDown}>
+
+              {
+                message.userId === id && isUserExist && <>
+                      <span onClick={() => deleteMessageFunc(message.id, message.roomId)} className={styles.btn}>delete</span>
+                      <span onClick={() => editMessage(message.id, message.text)} className={styles.btn}>edit</span>
+                  </>
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>
