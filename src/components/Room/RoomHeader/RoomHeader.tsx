@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import styles from "./room-header.module.scss";
 import {Link, useParams} from "react-router-dom";
-import {IRoom} from "../../../interfaces/IChat";
 import Avatar from "../../../UI/Avatar/Avatar";
 import {useAppSelector} from "../../../hooks/redux";
 import {chatAPI} from "../../../services/ChatServices";
+import {IRoom} from "../../../interfaces/IRoom";
 
 interface PropsType {
   userCount: number

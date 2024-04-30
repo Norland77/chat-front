@@ -3,12 +3,13 @@ import { chatAPI } from "../../services/ChatServices";
 import { useAppSelector } from "../../hooks/redux";
 import { useNavigate, useParams} from "react-router-dom";
 import SocketApi from "../../api/socket-api";
-import { IMessage, IUser} from "../../interfaces/IChat";
 import styles from './room.module.scss';
 import RoomHeader from "../../components/Room/RoomHeader/RoomHeader";
 import RoomSidebar from "../../components/Room/RoomSidebar/RoomSidebar";
 import RoomInput from "../../components/Room/RoomInput/RoomInput";
 import RoomMessage from "../../components/Room/RoomMessage/RoomMessage";
+import {IMessage} from "../../interfaces/IMessage";
+import {IUser} from "../../interfaces/IUser";
 
 const Room = () => {
     const {accessToken, id} = useAppSelector(state => state.userReducer);

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./room-sidebar.module.scss";
-import {IRoom} from "../../../interfaces/IChat";
 import {chatAPI} from "../../../services/ChatServices";
 import {useNavigate, useParams} from "react-router-dom";
 import SocketApi from "../../../api/socket-api";
 import ModalImage from "../../ModalImage/ModalImage";
 import Avatar from "../../../UI/Avatar/Avatar";
 import Button from "../../../UI/Button/Button";
+import {IRoom} from "../../../interfaces/IRoom";
 
 interface PropsType {
   room: IRoom | undefined

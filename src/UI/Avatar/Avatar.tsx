@@ -1,8 +1,8 @@
 import React from 'react';
 import {chatAPI} from "../../services/ChatServices";
-import {IRoom} from "../../interfaces/IChat";
 import {useAppSelector} from "../../hooks/redux";
 import styles from './avatar.module.scss'
+import {IRoom} from "../../interfaces/IRoom";
 interface PropsType {
   room: IRoom | undefined
   width: string;

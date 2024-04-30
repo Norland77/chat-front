@@ -3,9 +3,9 @@ import {Link, Navigate, useNavigate} from "react-router-dom";
 import {setId, setName, setToken} from "../../store/reducers/UserSlice";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {jwtDecode} from "jwt-decode";
-import {IUser} from "../../interfaces/IChat";
 import styles from './login.module.scss'
 import {authAPI} from "../../services/AuthServices";
+import {IUser} from "../../interfaces/IUser";
 
 const Login = () => {
 

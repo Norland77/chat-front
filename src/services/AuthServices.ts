@@ -1,5 +1,6 @@
 import mainApi from "./mainApi";
-import {IRegister, IUser} from "../interfaces/IChat";
+import {IUser} from "../interfaces/IUser";
+import {IRegister} from "../interfaces/IRegister";
 
 const enchancedApi = mainApi.enhanceEndpoints({
     addTagTypes: ["Login"],

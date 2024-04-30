@@ -3,7 +3,7 @@ import styles from "./room-files.module.scss";
 import ModalImage from "../../ModalImage/ModalImage";
 import AudioPlayer from "../../AudioPlayer/AudioPlayer";
 import fileImg from "../../../img/file.svg";
-import {IMessage} from "../../../interfaces/IChat";
+import {IMessage} from "../../../interfaces/IMessage";
 
 interface PropsType {
   message: IMessage

@@ -8,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import {useAppDispatch, useAppSelector} from "./hooks/redux";
 import Room from "./pages/Room/Room";
 import {setId, setName, setToken} from "./store/reducers/UserSlice";
-import {IUser} from "./interfaces/IChat";
 import {jwtDecode} from "jwt-decode";
 import Home from "./pages/Home/Home";
 import RoomCreateModal from "./components/RoomCreateModal/RoomCreateModal";
@@ -17,6 +16,7 @@ import {authAPI} from "./services/AuthServices";
 import UsersListModal from "./components/UsersListModal/UsersListModal";
 import Profile from "./pages/Profile/Profile";
 import ProfileEditModal from "./components/ProfileEditModal/ProfileEditModal";
+import {IUser} from "./interfaces/IUser";
 
 function App() {
   const { accessToken } = useAppSelector(state => state.userReducer)

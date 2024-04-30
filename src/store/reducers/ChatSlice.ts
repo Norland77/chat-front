@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IMessage} from "../../interfaces/IChat";
+import {IMessage} from "../../interfaces/IMessage";
 
 interface ChatState {
     messages: IMessage[];

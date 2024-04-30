@@ -1,15 +1,14 @@
 import mainApi from "./mainApi";
-import {
-    IFiles,
-    IInvite,
-    IInviteCreate,
-    IMessage,
-    IPersonalRoomCreate,
-    IRoom,
-    IRoomCreate,
-    IUser, IUserEdit
-} from "../interfaces/IChat";
 import {IGetAllImages} from "../interfaces/IGetAllImages";
+import {IRoom} from "../interfaces/IRoom";
+import {IRoomCreate} from "../interfaces/IRoomCreate";
+import {IMessage} from "../interfaces/IMessage";
+import {IInvite} from "../interfaces/IInvite";
+import {IInviteCreate} from "../interfaces/IInviteCreate";
+import {IUser} from "../interfaces/IUser";
+import {IUserEdit} from "../interfaces/IUserEdit";
+import {IPersonalRoomCreate} from "../interfaces/IPersonalRoomCreate";
+import {IFiles} from "../interfaces/IFiles";
 
 const enchancedApi = mainApi.enhanceEndpoints({
     addTagTypes: ['Chat', 'Messages', 'Room', 'User'],

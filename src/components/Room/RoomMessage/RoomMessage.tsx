@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import styles from "./room-message.module.scss";
 import RoomFiles from "../RoomFiles/RoomFiles";
-import {IMessage} from "../../../interfaces/IChat";
 import SocketApi from "../../../api/socket-api";
+import {IMessage} from "../../../interfaces/IMessage";
 
 interface PropsType {
   message: IMessage

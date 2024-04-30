@@ -4,9 +4,9 @@ import SocketApi from "../../api/socket-api";
 import styles from './profile-edit-modal.module.scss'
 import {chatAPI} from "../../services/ChatServices";
 import cameraIcon from "../../img/camera.svg";
-import {IUser} from "../../interfaces/IChat";
 import {MutationTrigger} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {MutationDefinition} from "@reduxjs/toolkit/query";
+import {IUser} from "../../interfaces/IUser";
 
 interface PropsType {
   isModalOpen: boolean;
