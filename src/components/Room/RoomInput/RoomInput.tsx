@@ -183,7 +183,9 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
                   className={ isEmojiOpen ? styles.emojiOpen : styles.emojiClose}
                   style={{position: 'absolute', bottom: '100%', right: '0'}}
                   reactionsDefaultOpen={false}
-                  onEmojiClick={ (s) => {
+                  onEmojiClick={ isEdit ? (s) => {
+                    setEditMsg(prevState => prevState + s.emoji)
+                  } : (s) => {
                     setText(prevState => prevState + s.emoji)
                   }} />
               </div>
