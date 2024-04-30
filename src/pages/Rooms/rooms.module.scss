@@ -4,26 +4,26 @@
   width: 20%;
   text-align: center;
   align-items: center;
-  max-height: 875px;
+  max-height: 900px;
   overflow: auto;
-  background: #F6F6F9;
+  background: var(--second-bg-color);
   &::-webkit-scrollbar {
     width: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #CCD1D8;
+    background-color: var(--second-bg-color);
     border-radius: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    background-color: var(--main-bg-color);
   }
   &_addBtn {
     width: 50px;
     height: 50px;
    /* border-radius: 15px;*/
-    border: 1px solid #DFDFDF;
+    border: 1px solid var(--stroke-color);
     cursor: pointer;
     text-decoration: none;
     color: black;
@@ -38,32 +38,27 @@
     display: flex;
     flex-direction: column;
     > .active {
-      background-color: rgba(0,163,255,0.2);
+      background-color: var(--hover-color);
     }
     > .room {
       display: flex;
       flex-direction: row;
       text-align: left;
-      align-items: start;
       width: 100%;
       height: 80px;
-      //justify-content: space-between;
       align-items: center;
       font-size: 22px;
       gap: 10px;
       font-weight: bold;
-      /*border-radius: 5px;*/
       cursor: pointer;
       text-decoration: none;
-      color: black;
       transition-duration: .3s;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       padding: 5px;
-      /*border-bottom: 1px solid black;*/
       &:hover {
-        background-color: rgba(0,163,255,0.2);
+        background-color: var(--hover-color);
         transition-duration: .3s;
       }
       > div {
@@ -88,7 +83,7 @@
             > p {
               font-size: 18px;
               font-weight: normal;
-              color: #717171;
+              color: var(--main-font-color);
             }
           }
           > span {
@@ -110,7 +105,7 @@
           > p {
             font-weight: normal;
             font-size: 16px;
-            color: #5F5F5F;
+            color: var(--main-font-color);
             max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -122,7 +117,7 @@
           > span {
             font-weight: normal;
             font-size: 16px;
-            color: #5F5F5F;
+            color: var(--main-font-color);
           }
         }
       }
@@ -138,13 +133,16 @@
 
 .search {
   height: 40px !important;
+  margin: 18px 12px;
+  width: 95% !important;
   > input {
+    border-radius: 12px;
     font-size: 18px;
     width: 100%;
-    border: none;
-    border-bottom: solid 1px #DFDFDF;
-    border-top: solid 1px #DFDFDF;
-    padding: 2px 5px;
+    border: solid 1px var(--stroke-color);
+    padding: 2px 10px;
+    background-color: var(--second-bg-color);
+    color: var(--main-font-color);
     &:focus-visible {
       outline: none;
     }
@@ -153,6 +151,6 @@
 
 .notFound {
   font-size: 24px;
-  color: #515151;
+  color: var(--main-font-color);
   margin-top: 20px;
 }

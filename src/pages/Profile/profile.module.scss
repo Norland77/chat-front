@@ -2,13 +2,15 @@
   display: flex;
   gap: 50px;
   padding: 15px;
+  background-color: var(--main-bg-color);
+  height: 100%;
 }
 
 .avatarNone {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #5F5F5F;
+  background-color: var(--main-font-color);
 }
 
 .avatar {
@@ -25,7 +27,7 @@
   > span {
     font-size: 18px;
     font-weight: normal;
-    color: #717171;
+    color: var(--main-font-color);
   }
 }
 
@@ -34,7 +36,7 @@
   flex-direction: column;
   gap: 5px;
   > .button {
-    color: #5F5F5F;
+    color: var(--main-font-color);
     text-decoration: none;
     text-align: center;
     padding: 5px 15px;
@@ -42,7 +44,7 @@
     border-radius: 5px;
     transition-duration: 0.3s;
     &:hover {
-      background-color: rgba(0, 163, 255, 0.2);
+      background-color: var(--hover-color);
       transition-duration: 0.3s;
     }
   }

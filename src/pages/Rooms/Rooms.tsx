@@ -17,11 +17,25 @@ const Rooms = () => {
         SocketApi.socket?.emit('joinRoom', id);
     };
 
-    function formatTime(dateTime: Date) {
+    function formatTime(dateTime: Date): string {
         const date = new Date(dateTime);
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        return `${hours}:${minutes}`;
+        const now = new Date();
+
+        const diffDays = Math.round(Math.abs(now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+        if (diffDays === 0) {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        } else if (diffDays === 1) {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `Yesterday - ${hours}:${minutes}`;
+        } else {
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear().toString();
+            return `${day}.${month}.${year}`;
+        }
     }
 
     const filteredRooms = rooms?.filter(room => (

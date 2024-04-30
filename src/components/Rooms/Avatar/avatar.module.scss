@@ -4,8 +4,8 @@
 
 .avatarNone {
   border-radius: 50%;
-  background-color: #515151;
-  color: #FFFFFF;
+  background-color: var(--main-font-color);
+  color: var(--left-side-bg-color);
   display: flex;
   justify-content: center;
   align-items: center;

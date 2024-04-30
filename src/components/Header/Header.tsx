@@ -9,6 +9,7 @@ import personsIcon from '../../img/createChat.svg';
 import profileIcon from '../../img/profile.svg';
 import RoomCreateModal from "../RoomCreateModal/RoomCreateModal";
 import UsersListModal from "../UsersListModal/UsersListModal";
+import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
 const Header = () => {
     const {username, accessToken, id} = useAppSelector(state => state.userReducer)
     const [logout, {}] = authAPI.useLogoutMutation()
@@ -70,10 +71,24 @@ const Header = () => {
                   <div className={styles.link}>
                       <Link onClick={() => setOpen(false)} to={'/home/profile'}> <img src={profileIcon} alt="profile"/> Profile</Link>
                   </div>
+                  <div>
+                      <span>Switch color mode</span>
+                      <ToggleColorMode />
+                  </div>
               </div>
           </div>
           <RoomCreateModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>
           <UsersListModal isOpen={isUsersModalOpen} setIsOpen={setIsUsersModalOpen} />
+          <div onClick={() => setOpen(false)} style={isOpen ? {
+              position: "absolute",
+              top: '0',
+              bottom: '0',
+              left: '0',
+              right: '0',
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)'
+          }: {display: 'none'}}></div>
       </>
     );
 };

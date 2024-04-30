@@ -96,7 +96,7 @@ const RoomCreateModal = ({isOpen, setIsOpen}: PropsType) => {
               }}/>
             </div>
             <div className={styles.body_privat}>
-              <input onChange={(e) => {setIsPrivate(e.target.checked)}} type="checkbox" id={'private'} name={'private'} value={'private'} checked={isPrivate}/>
+              <input onChange={(e) => {setIsPrivate(e.target.checked)}} type="checkbox" id={'private'} name={'private'} value={'private'} checked={isPrivate} style={{display: 'none'}}/>
               <label className={styles.privateLabel} htmlFor='private'><img src={isPrivate ? privateIcon : unlockIcon} alt="private"/></label>
             </div>
           </div>
