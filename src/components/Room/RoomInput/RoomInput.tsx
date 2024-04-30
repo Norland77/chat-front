@@ -10,6 +10,7 @@ import fileIcon from '../../../img/file.svg';
 import videoIcon from '../../../img/videoPreview.svg';
 import audioIcon from '../../../img/audio.svg';
 import EmojiPicker from "emoji-picker-react";
+import Button from "../../../UI/Button/Button";
 
 interface PropsType {
   isUserExist: boolean
@@ -186,14 +187,20 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
                     setText(prevState => prevState + s.emoji)
                   }} />
               </div>
-              <button onClick={isEdit ? () => updateMessageFunc() : () => sendMessage()}>
-                {isEdit ? "Edit" : "Send"}
-                <img src={sendIcon} alt="send"/>
-              </button>
-            </> : <button onClick={() => joinRoom()} className={styles.join_button}>Join to Chat</button>
+              <Button text={isEdit ? "Edit" : "Send"}
+                      img={sendIcon}
+                      onClick={isEdit ? updateMessageFunc : sendMessage}
+                      font_size={'20px'}
+              />
+            </> : <Button text={'Join to Chat'}
+                          onClick={joinRoom}
+                          width={'100%'}
+                          font_size={'20px'}
+                  />
           }
           {
-            isEdit && <button onClick={() => closeEdit()}>X</button>
+            isEdit && <Button text={'X'} onClick={closeEdit}
+                              font_size={'20px'}/>
           }
         </div>
       </div>

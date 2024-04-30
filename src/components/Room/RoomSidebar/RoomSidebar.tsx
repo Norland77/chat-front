@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import SocketApi from "../../../api/socket-api";
 import ModalImage from "../../ModalImage/ModalImage";
 import Avatar from "../../../UI/Avatar/Avatar";
+import Button from "../../../UI/Button/Button";
 
 interface PropsType {
   room: IRoom | undefined
@@ -90,7 +91,7 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
       {
         room && room.isPersonal ?
           <div className={styles.sidebar_userInfo}>
-            <img src={user?.avatar_url} alt="avatar"/>
+            <Avatar room={room} width={'100px'} height={'100px'} />
             <h2>{user?.username}</h2>
             <span>User Info</span>
             <div>
@@ -124,9 +125,13 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
                   <input type="text" readOnly value={inviteLink}/>
                 {
                   room.ownerId === id &&
-                    <button style={{display: inviteLink !== '' ? "none" : "block"}}
-                            onClick={() => generateLink()}>Generate invite link
-                    </button>
+                    <div style={{display: inviteLink !== '' ? "none" : "flex", justifyContent: 'center'}}>
+                        <Button text={'Generate invite link'}
+                                onClick={generateLink}
+                                width={'90%'}
+                                font_size={'12px'}
+                        />
+                    </div>
                 }
               </div>
               <div className={styles.sidebar_users}>

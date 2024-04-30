@@ -9,7 +9,7 @@ import personsIcon from '../../img/createChat.svg';
 import profileIcon from '../../img/profile.svg';
 import RoomCreateModal from "../RoomCreateModal/RoomCreateModal";
 import UsersListModal from "../UsersListModal/UsersListModal";
-import ToggleColorMode from "../ToggleColorMode/ToggleColorMode";
+import ToggleColorMode from "../../UI/ToggleColorMode/ToggleColorMode";
 const Header = () => {
     const {username, accessToken, id} = useAppSelector(state => state.userReducer)
     const [logout, {}] = authAPI.useLogoutMutation()

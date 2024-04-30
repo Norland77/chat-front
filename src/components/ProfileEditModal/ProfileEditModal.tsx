@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {useAppSelector} from "../../hooks/redux";
 import SocketApi from "../../api/socket-api";
-import styles from './profile-edit.module.scss'
+import styles from './profile-edit-modal.module.scss'
 import {chatAPI} from "../../services/ChatServices";
 import cameraIcon from "../../img/camera.svg";
 import {IUser} from "../../interfaces/IChat";
@@ -15,7 +15,7 @@ interface PropsType {
   fetchUser: any
 }
 
-const ProfileEdit = ({isModalOpen, setIsModalOpen, user, fetchUser}: PropsType) => {
+const ProfileEditModal = ({isModalOpen, setIsModalOpen, user, fetchUser}: PropsType) => {
   const { accessToken, id } = useAppSelector(state => state.userReducer);
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
@@ -116,4 +116,4 @@ const ProfileEdit = ({isModalOpen, setIsModalOpen, user, fetchUser}: PropsType) 
   );
 };
 
-export default ProfileEdit;
+export default ProfileEditModal;

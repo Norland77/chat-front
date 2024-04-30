@@ -16,7 +16,7 @@ import InvitePage from "./pages/InvitePage/InvitePage";
 import {authAPI} from "./services/AuthServices";
 import UsersListModal from "./components/UsersListModal/UsersListModal";
 import Profile from "./pages/Profile/Profile";
-import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
+import ProfileEditModal from "./components/ProfileEditModal/ProfileEditModal";
 
 function App() {
   const { accessToken } = useAppSelector(state => state.userReducer)

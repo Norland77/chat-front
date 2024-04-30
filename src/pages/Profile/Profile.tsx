@@ -2,7 +2,7 @@ import {useAppSelector} from "../../hooks/redux";
 import {chatAPI} from "../../services/ChatServices";
 import styles from './profile.module.scss'
 import {Link} from "react-router-dom";
-import ProfileEdit from "../ProfileEdit/ProfileEdit";
+import ProfileEditModal from "../../components/ProfileEditModal/ProfileEditModal";
 import {useEffect, useState} from "react";
 
 
@@ -37,7 +37,7 @@ const Profile = () => {
           }} to={'#'}>Edit Profile</Link>
         </div>
       </div>
-      <ProfileEdit  isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} user={user} fetchUser={fetchUser}/>
+      <ProfileEditModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} user={user} fetchUser={fetchUser}/>
     </>
   );
 };
