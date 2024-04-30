@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import styles from "../../../pages/Room/room.module.scss";
+import styles from "./room-input.module.scss";
 import SocketApi from "../../../api/socket-api";
 import { useParams } from "react-router-dom";
 import { chatAPI } from "../../../services/ChatServices";

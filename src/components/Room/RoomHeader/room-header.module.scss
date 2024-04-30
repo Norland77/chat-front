@@ -1,0 +1,88 @@
+.room_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 46px;
+  background-color: var(--second-bg-color);
+  > div {
+    display: flex;
+    gap: 18px;
+    > div {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      > p {
+        font-size: 14px;
+        font-weight: lighter;
+      }
+      > .online {
+        color: var(--right-side-bg-color);
+      }
+      > .offline {
+        color: var(--main-font-color);
+      }
+      > h3 {
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--main-font-color);
+      }
+    }
+  }
+  > .header_right {
+    gap: 42px;
+    > img {
+      cursor: pointer;
+    }
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      > svg {
+        cursor: pointer;
+        > path {
+          transition-duration: .3s;
+        }
+        &:hover {
+          > path {
+            fill: var(--right-side-bg-color);
+            transition-duration: .3s;
+          }
+        }
+      }
+      > img {
+        cursor: pointer;
+      }
+      > .menu {
+        position: absolute;
+        top: 13%;
+        right: 12.6%;
+        background-color: var(--second-bg-color);
+        padding: 15px;
+        opacity: 0;
+        pointer-events: none;
+        transition-duration: .3s;
+        > a {
+          margin-top: 20px;
+          width: 100%;
+          height: 20px;
+          background-color: #ec6069;
+          border: none;
+          color: var(--second-font-color);
+          border-radius: 5px;
+          font-weight: bold;
+          cursor: pointer;
+          align-self: flex-end;
+          text-decoration: none;
+          padding: 5px 40px;
+        }
+      }
+      > .show {
+        opacity: 1;
+        pointer-events: all;
+        transition-duration: .3s;
+      }
+    }
+  }
+}

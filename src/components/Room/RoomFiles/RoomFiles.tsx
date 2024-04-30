@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "../../../pages/Room/room.module.scss";
+import styles from "./room-files.module.scss";
 import ModalImage from "../../ModalImage/ModalImage";
 import AudioPlayer from "../../AudioPlayer/AudioPlayer";
 import fileImg from "../../../img/file.svg";

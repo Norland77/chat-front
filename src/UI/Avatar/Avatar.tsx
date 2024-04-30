@@ -1,7 +1,7 @@
 import React from 'react';
-import {chatAPI} from "../../../services/ChatServices";
-import {IRoom} from "../../../interfaces/IChat";
-import {useAppSelector} from "../../../hooks/redux";
+import {chatAPI} from "../../services/ChatServices";
+import {IRoom} from "../../interfaces/IChat";
+import {useAppSelector} from "../../hooks/redux";
 import styles from './avatar.module.scss'
 interface PropsType {
   room: IRoom | undefined

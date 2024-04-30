@@ -5,7 +5,7 @@ import SocketApi from "../../api/socket-api";
 import { useAppSelector } from "../../hooks/redux";
 import { Link, useParams } from "react-router-dom";
 import groupChat from '../../img/groupChat.svg';
-import Avatar from "../../components/Rooms/Avatar/Avatar";
+import Avatar from "../../UI/Avatar/Avatar";
 
 const Rooms = () => {
     const { accessToken, id, username } = useAppSelector(state => state.userReducer);

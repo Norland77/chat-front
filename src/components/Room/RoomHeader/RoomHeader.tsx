@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import styles from "../../../pages/Room/room.module.scss";
+import styles from "./room-header.module.scss";
 import {Link, useParams} from "react-router-dom";
 import {IRoom} from "../../../interfaces/IChat";
-import Avatar from "../../Rooms/Avatar/Avatar";
+import Avatar from "../../../UI/Avatar/Avatar";
 import {useAppSelector} from "../../../hooks/redux";
 import {chatAPI} from "../../../services/ChatServices";
 

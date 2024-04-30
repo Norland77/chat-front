@@ -1,0 +1,190 @@
+.sidebar {
+  width: 15%;
+  border: 1px solid var(--stroke-color);
+  border-left: none;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--second-bg-color);
+  > button {
+    margin-top: 20px;
+    width: 100%;
+    height: 20px;
+    background-color: #ec6069;
+    border: none;
+    color: var(--second-bg-color);
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  > .image_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    padding: 10px;
+    > img {
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+  > h3 {
+    color: var(--main-font-color);
+  }
+  > div {
+    color: var(--main-font-color);
+    > .sidebar_invite {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 20px 0;
+      margin: 20px 0;
+      > input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #515151;
+        padding: 2px;
+        background: none;
+        &:focus-visible {
+          outline: none;
+        }
+      }
+      > button {
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: var(--right-side-bg-color);
+        padding: 5px 10px;
+        color: var(--second-font-color);
+        margin: 0 10px;
+      }
+    }
+    .sidebar_users {
+      display: flex;
+      flex-direction: column;
+      &_user {
+        display: flex;
+        gap: 5px;
+        transition-duration: .3s;
+        padding: 5px 10px;
+        &:last-child {
+          align-items: flex-end;
+        }
+        &:hover {
+          background-color: var(--hover-color);
+          transition-duration: .3s;
+        }
+        > span {
+          display: flex;
+          width: 50px;
+          height: fit-content;
+          cursor: pointer;
+          font-size: 12px;
+          border-bottom: solid 1px #ec6069;
+          align-items: flex-end;
+          color: #ec6069;
+        }
+        > div {
+          width: 100%;
+          padding: 5px;
+          border-radius: 5px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          > img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+          }
+          > div {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            > .role {
+              font-size: 12px;
+              font-weight: lighter;
+              color: var(--right-side-bg-color);
+            }
+            > .name {
+              font-size: 18px;
+            }
+          }
+          > button {
+            padding: 2px;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+            transition-duration: .3s;
+            &:hover {
+              background-color: #878790;
+              transition-duration: .3s;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebar_userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 10px;
+  color: var(--main-font-color);
+  > img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+  > .avatarNone {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: var(--main-font-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--second-font-color);
+  }
+  > div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+    color: var(--main-font-color);
+    > .sidebar_userInfo_subtitle {
+      font-size: 14px;
+      font-weight: lighter;
+      color: var(--main-font-color);
+    }
+    > span {
+      font-weight: normal;
+      font-size: 16px;
+    }
+  }
+}
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  cursor: pointer;
+  > img {
+    cursor: default;
+  }
+}
