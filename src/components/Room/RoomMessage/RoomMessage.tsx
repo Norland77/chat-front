@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import styles from "./room-message.module.scss";
 import RoomFiles from "../RoomFiles/RoomFiles";
 import SocketApi from "../../../api/socket-api";
 import {IMessage} from "../../../interfaces/IMessage";
+import {useContextMenu} from "../../../hooks/useContextMenu";
 
 interface PropsType {
   message: IMessage
@@ -13,6 +14,7 @@ interface PropsType {
 
 const RoomMessage = ({message, id, isUserExist, editMessage}: PropsType) => {
   const [show, setShow] = useState(false);
+  const { setContextMenu } = useContextMenu()
 
   const urlRegex = /(?:https?|ftp):\/\/[\n\S]+/g;
 
@@ -39,14 +41,47 @@ const RoomMessage = ({message, id, isUserExist, editMessage}: PropsType) => {
     }
   }
 
-  const deleteMessageFunc = (id: string, roomId: string) => {
-    SocketApi.socket?.emit('chatToServerDelete', { id: id, roomId: roomId});
+  const deleteMessageFunc = (messageId: string, roomId: string) => {
+    if (message.userId === id && isUserExist) {
+      SocketApi.socket?.emit('chatToServerDelete', { id: messageId, roomId: roomId});
+    }
   }
+
+  const userContextMenu = useMemo(() => [
+    {
+      name: 'edit message',
+      onClick: () => editMessage(message.id, message.text),
+    },
+    {
+      name: 'delete message',
+      onClick: () => deleteMessageFunc(message.id, message.roomId),
+    }
+  ], [])
+
+  const otherUserContextMenu = useMemo(() => [
+    {
+      name: 'reply message',
+      onClick: () => {},
+    }
+  ], [])
+
+  const handleContextMenu = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      event.preventDefault();
+
+      const { clientX, clientY } = event;
+      if (message.userId === id) {
+        setContextMenu(userContextMenu, [clientX, clientY]);
+      } else {
+        setContextMenu(otherUserContextMenu, [clientX, clientY]);
+      }
+  }, [setContextMenu, userContextMenu, otherUserContextMenu])
 
   return (
     <div key={message.id}
          onClick={() => setShow(!show)}
-         className={message.userId === id ? styles.room_body_right : styles.room_body_left}>
+         className={message.userId === id ? styles.room_body_right : styles.room_body_left}
+         onContextMenu={(event) => handleContextMenu(event)}
+    >
       <div>
         <div className={styles.avatarBlock}>
           <img src={message.User?.avatar_url} alt="avatar"/>
@@ -64,17 +99,9 @@ const RoomMessage = ({message, id, isUserExist, editMessage}: PropsType) => {
                 ))
               }}/>
             </div>
-
-            <RoomFiles message={message} />
-            <div className={styles.room_body_msgDown}>
-
-              {
-                message.userId === id && isUserExist && <>
-                      <span onClick={() => deleteMessageFunc(message.id, message.roomId)} className={styles.btn}>delete</span>
-                      <span onClick={() => editMessage(message.id, message.text)} className={styles.btn}>edit</span>
-                  </>
-              }
-            </div>
+            {
+              message.files[0].path !== '' && <RoomFiles message={message} />
+            }
           </div>
         </div>
       </div>

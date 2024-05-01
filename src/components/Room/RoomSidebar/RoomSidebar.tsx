@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import styles from "./room-sidebar.module.scss";
 import {chatAPI} from "../../../services/ChatServices";
 import {useNavigate, useParams} from "react-router-dom";
@@ -7,6 +7,8 @@ import ModalImage from "../../ModalImage/ModalImage";
 import Avatar from "../../../UI/Avatar/Avatar";
 import Button from "../../../UI/Button/Button";
 import {IRoom} from "../../../interfaces/IRoom";
+import {useContextMenu} from "../../../hooks/useContextMenu";
+import User from "./User/User";
 
 interface PropsType {
   room: IRoom | undefined
@@ -21,13 +23,9 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
   const [isOpenImg, setIsOpenImg] = useState(false);
   const [imgName, setImgName] = useState('');
   const [createInvite, {}] = chatAPI.useCreateInviteMutation();
-  const [createPersonalRoom, {data: roomCreated}] = chatAPI.useCreatePersonalRoomMutation();
-  const [leaveRoom, {}] = chatAPI.useLeaveRoomMutation();
-  const {data: rooms} = chatAPI.useFetchAllRoomsQuery(accessToken)
   const roomId = room?.id
   const {data: images} = chatAPI.useGetAllImagesByRoomQuery({roomId, accessToken})
   const params = useParams();
-  const navigate = useNavigate();
 
   const userId = room && room.firstUserId === id ? room.secondUserId : room && room.firstUserId;
 
@@ -43,11 +41,6 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
     }
   }, [room]);
 
-  useEffect(() => {
-    if (roomCreated)
-      return navigate(`/home/room/${roomCreated && roomCreated.id}`);
-  }, [roomCreated]);
-
   const generateLink = () => {
     let abc = "abcdefghijklmnopqrstuvwxyz1234567890";
     let hash = "";
@@ -56,34 +49,6 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
     }
     setInviteLink(`http://localhost:3000/${hash}`)
     createInvite({dto: {roomId: params.Id ? params.Id : "", token: hash, accept: true, inviteLink: `http://localhost:3000/${hash}`}, token: accessToken});
-  }
-
-  const createRoom = (username1: string, secondId: string) => {
-    if (username1 === username) {
-      return;
-    }
-    const name = `${username1},${username}`.split(',')
-    const sortedFirstArr = name.sort();
-    let isFind = false;
-    rooms && rooms.map(room => {
-      const secondName = room.name.split(',')
-      const sortedSecondArr = secondName.sort();
-      if (JSON.stringify(sortedFirstArr) === JSON.stringify(sortedSecondArr)) {
-        isFind = true;
-        return navigate(`/home/room/${room.id}`);
-      }
-    })
-
-    if (isFind) {
-      return
-    } else {
-      createPersonalRoom({token: accessToken, name: `${username1},${username}`, isPrivate: true, isPersonal: true, firstUserId: id, secondUserId: secondId})
-    }
-  }
-
-  const kick = (id: string) => {
-    leaveRoom({roomId: params.Id ? params.Id: "", userId: id, token: accessToken})
-    SocketApi.socket?.emit('kickUser', { roomId: params.Id });
   }
 
   return (
@@ -137,21 +102,7 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
               <div className={styles.sidebar_users}>
                   <h3>User list</h3>
                 {room && room.users?.map(user => (
-                  <div className={styles.sidebar_users_user}>
-                    <div onClick={() => createRoom(user.username, user.id)} key={user.id}>
-                      <img src={user.avatar_url} alt="avatar"/>
-                      <div>
-                        <span className={styles.name}>{user.username}</span>
-                        {room && room.ownerId === user.id &&
-                          <span className={styles.role}>Admin</span>}
-                      </div>
-                    </div>
-                    {
-                      room && room.ownerId === id && room.ownerId !== user.id &&
-                        <span onClick={() => kick(user.id)}>kick out</span>
-                    }
-                  </div>
-
+                  <User user={user} room={room} id={id} username={username} accessToken={accessToken}/>
                 ))}
               </div>
           </div>

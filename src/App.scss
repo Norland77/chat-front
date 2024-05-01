@@ -6,7 +6,8 @@ body {
   --left-side-bg-color: #FFFFFF;
   --right-side-bg-color: #00A3FF;
   --hover-color: rgba(0,163,255,0.2);
-  --stroke-color: #DFDFDF
+  --stroke-color: #DFDFDF;
+  --context-bg-color: rgba(0, 82, 134, 0.8);
 }
 
 body.dark {
@@ -17,5 +18,6 @@ body.dark {
   --left-side-bg-color: #292929;
   --right-side-bg-color: #005686;
   --hover-color: rgba(0, 91, 141, 0.2);
-  --stroke-color: #303030
+  --stroke-color: #303030;
+  --context-bg-color: rgba(1, 52, 77, 0.8);
 }

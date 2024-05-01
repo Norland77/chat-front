@@ -1,0 +1,23 @@
+.context_menu {
+  position: fixed;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--context-bg-color);
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: fit-content;
+  &_item {
+    color: var(--second-font-color);
+    cursor: pointer;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 2px;
+    transition-duration: .3s;
+    &:hover {
+      background-color: var(--hover-color);
+      transition-duration: .3s;
+    }
+  }
+}
