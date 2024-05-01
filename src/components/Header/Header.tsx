@@ -7,11 +7,12 @@ import {useState} from "react";
 import {chatAPI} from "../../services/ChatServices";
 import personsIcon from '../../img/createChat.svg';
 import profileIcon from '../../img/profile.svg';
+import logo from '../../img/logo.png';
 import RoomCreateModal from "../RoomCreateModal/RoomCreateModal";
 import UsersListModal from "../UsersListModal/UsersListModal";
 import ToggleColorMode from "../../UI/ToggleColorMode/ToggleColorMode";
 const Header = () => {
-    const {username, accessToken, id} = useAppSelector(state => state.userReducer)
+    const { accessToken, id} = useAppSelector(state => state.userReducer)
     const [logout, {}] = authAPI.useLogoutMutation()
     const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id});
     const dispatch = useAppDispatch();
@@ -39,9 +40,11 @@ const Header = () => {
                       <div className={styles.burger_menu_bar}></div>
                       <div className={styles.burger_menu_bar}></div>
                   </div>
-                  <h1>{username}</h1>
               </div>
-              <h1>Chat</h1>
+              <div>
+                  <img style={{width: '30%'}} src={logo} alt="logo"/>
+                  <h1>Flash</h1>
+              </div>
               {
                 accessToken && <Link onClick={() => logoutFunc()} to={'/login'}>
                     <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
