@@ -55,25 +55,29 @@ const Header = () => {
                 </Link>
               }
               <div className={`${styles.modal} ${isOpen && styles.active}`}>
-                  <div>
-                      <img src={user?.avatar_url} alt="avatar"/>
-                      <span>{user?.username}</span>
-                  </div>
-                  <div className={styles.link}>
-                      <Link onClick={() => {
-                          setOpen(false);
-                          setIsModalOpen(true);
-                      }} to={'#'}> <img src={personsIcon} alt="create chat"/> Create Chat</Link>
-                  </div>
-                  <div className={styles.link}>
-                      <Link onClick={() => {
-                          setOpen(false);
-                          setIsUsersModalOpen(true);
-                      }} to={'#'}> <img src={personsIcon} alt="all users"/> Show all users</Link>
-                  </div>
-                  <div className={styles.link}>
-                      <Link onClick={() => setOpen(false)} to={'/home/profile'}> <img src={profileIcon} alt="profile"/> Profile</Link>
-                  </div>
+                  {
+                      user && <>
+                        <div>
+                            <img src={user?.avatar_url} alt="avatar"/>
+                            <span>{user?.username}</span>
+                        </div>
+                        <div className={styles.link}>
+                            <Link onClick={() => {
+                                setOpen(false);
+                                setIsModalOpen(true);
+                            }} to={'#'}> <img src={personsIcon} alt="create chat"/> Create Chat</Link>
+                        </div>
+                        <div className={styles.link}>
+                            <Link onClick={() => {
+                                setOpen(false);
+                                setIsUsersModalOpen(true);
+                            }} to={'#'}> <img src={personsIcon} alt="all users"/> Show all users</Link>
+                        </div>
+                        <div className={styles.link}>
+                            <Link onClick={() => setOpen(false)} to={'/home/profile'}> <img src={profileIcon} alt="profile"/> Profile</Link>
+                        </div>
+                    </>
+                  }
                   <div>
                       <span>Switch color mode</span>
                       <ToggleColorMode />
@@ -90,7 +94,8 @@ const Header = () => {
               right: '0',
               width: '100%',
               height: '100%',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)'
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              zIndex: '1'
           }: {display: 'none'}}></div>
       </>
     );

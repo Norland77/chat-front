@@ -1,6 +1,7 @@
 import mainApi from "./mainApi";
 import {IUser} from "../interfaces/IUser";
 import {IRegister} from "../interfaces/IRegister";
+import {ILogin} from "../interfaces/ILogin";
 
 const enchancedApi = mainApi.enhanceEndpoints({
     addTagTypes: ["Login"],
@@ -15,7 +16,7 @@ export const authAPI = enchancedApi.injectEndpoints({
                 body: dto
             }),
         }),
-        login: build.mutation<{ accessToken: string }, IRegister>({
+        login: build.mutation<{ accessToken: string }, ILogin>({
             query: (dto) => ({
                 url: '/auth/login',
                 method: 'POST',
