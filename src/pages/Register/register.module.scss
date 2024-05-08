@@ -85,6 +85,9 @@
         padding: 5px;
         color: var(--main-font-color);
         font-size: 18px;
+        &:disabled {
+          background-color: #515151;
+        }
       }
       > label {
         font-size: 14px;
@@ -103,6 +106,10 @@
         &:hover {
           background-color: var(--hover-color);
           transition-duration: .3s;
+        }
+        &:disabled {
+          background-color: #878790;
+          cursor: wait;
         }
       }
       > a {

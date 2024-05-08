@@ -39,5 +39,21 @@ export const authAPI = enchancedApi.injectEndpoints({
             }),
             invalidatesTags: ["Login"]
         }),
+        sendCode: build.mutation<boolean, {email: string}>({
+            query: (dto) => ({
+                url: '/auth/send-email',
+                method: 'POST',
+                body: dto,
+                credentials: "include"
+            }),
+        }),
+        confirmCode: build.mutation<boolean, {email: string, code: string}>({
+            query: (dto) => ({
+                url: '/auth/send-email',
+                method: 'POST',
+                body: dto,
+                credentials: "include"
+            }),
+        }),
     })
 })
