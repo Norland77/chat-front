@@ -100,7 +100,7 @@ const RoomMessage = ({message, id, isUserExist, editMessage}: PropsType) => {
               }}/>
             </div>
             {
-              message.files[0].path !== '' && <RoomFiles message={message} />
+              (message.files[0]?.path !== '' && message.files.length !== 0) && <RoomFiles message={message} />
             }
           </div>
         </div>
