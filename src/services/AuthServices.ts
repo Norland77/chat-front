@@ -2,9 +2,10 @@ import mainApi from "./mainApi";
 import {IUser} from "../interfaces/IUser";
 import {IRegister} from "../interfaces/IRegister";
 import {ILogin} from "../interfaces/ILogin";
+import {IAllUserAgent} from "../interfaces/IAllUserAgent";
 
 const enchancedApi = mainApi.enhanceEndpoints({
-    addTagTypes: ["Login"],
+    addTagTypes: ["Login", "Agent"],
 })
 
 export const authAPI = enchancedApi.injectEndpoints({
@@ -25,6 +26,22 @@ export const authAPI = enchancedApi.injectEndpoints({
             }),
             invalidatesTags: ['Login']
         }),
+        loginAgent: build.mutation<{ accessToken: string }, { id: string }>({
+            query: (dto) => ({
+                url: `/auth/login-userAgent/${dto.id}`,
+                method: 'POST',
+                credentials: "include"
+            }),
+            invalidatesTags: ['Agent']
+        }),
+        deleteAgent: build.mutation<{ accessToken: string }, { id: string }>({
+            query: (dto) => ({
+                url: `/auth/delete-saved-account/${dto.id}`,
+                method: 'POST',
+                credentials: "include"
+            }),
+            invalidatesTags: ['Agent']
+        }),
         refresh: build.query<{ accessToken: string }, null>({
             query: (token) => ({
                 url: '/auth/refresh-tokens',
@@ -32,12 +49,19 @@ export const authAPI = enchancedApi.injectEndpoints({
             }),
             providesTags: ["Login"]
         }),
+        getAllAccount: build.query<IAllUserAgent[], null>({
+            query: () => ({
+                url: '/auth/all-account',
+                credentials: "include"
+            }),
+            providesTags: ["Agent"]
+        }),
         logout: build.mutation<string, null>({
             query: (token) => ({
                 url: '/auth/logout',
                 credentials: "include"
             }),
-            invalidatesTags: ["Login"]
+            invalidatesTags: ["Login", "Agent"]
         }),
         sendCode: build.mutation<boolean, {email: string}>({
             query: (dto) => ({

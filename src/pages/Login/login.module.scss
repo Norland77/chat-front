@@ -1,10 +1,11 @@
 .login {
   display: flex;
-  flex-direction: column;
-  gap: 25px;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
   padding: 50px;
   text-align: center;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   background-color: var(--main-bg-color);
   height: 100%;
@@ -34,6 +35,11 @@
     > h1 {
       font-size: 30px;
       color: var(--main-font-color);
+    }
+    > span {
+      color: #5f1219;
+      font-size: 16px;
+      font-weight: bold;
     }
     &_down {
       display: flex;
@@ -112,6 +118,89 @@
         &:hover {
           color: #878790;
           transition-duration: .3s;
+        }
+      }
+    }
+  }
+  > .acconts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    margin-top: 100px;
+    gap: 15px;
+    > h3 {
+      color: var(--main-font-color);
+      font-size: 24px;
+    }
+    > button {
+      width: 100%;
+      padding: 10px;
+      background: none;
+      border: 1px solid var(--stroke-color);
+      color: var(--main-font-color);
+      border-radius: 5px;
+      transition-duration: .3s;
+      &:hover {
+        background-color: var(--hover-color);
+        transition-duration: .3s;
+        cursor: pointer;
+      }
+    }
+    > .acconts_body {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      align-items: center;
+      > svg {
+        > path {
+          stroke: var(--stroke-color);
+          transition-duration: .3s;
+        }
+        &:hover {
+          cursor: pointer;
+          > path {
+            stroke: var(--hover-color);
+            transition-duration: .3s;
+          }
+        }
+      }
+      > div {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 15px;
+        transition-duration: .3s;
+        border-radius: 5px;
+        border: 1px solid var(--stroke-color);
+        &:hover {
+          background-color: var(--hover-color);
+          cursor: pointer;
+          transition-duration: .3s;
+        }
+        > div {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: var(--second-bg-color);
+          color: var(--main-font-color);
+          border-radius: 25px;
+        }
+        > img {
+          width: 50px;
+          height: 50px;
+          border-radius: 25px;
+        }
+        > span {
+          flex: 1;
+          text-align: center;
+          color: var(--main-font-color);
+          font-size: 18px;
         }
       }
     }
