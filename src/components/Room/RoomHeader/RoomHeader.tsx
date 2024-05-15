@@ -16,9 +16,12 @@ interface PropsType {
 
 const RoomHeader = ({userCount, room, id, deleteRoomFunc} : PropsType) => {
   const { accessToken} = useAppSelector(state => state.userReducer)
-  const userId = room && room.firstUserId === id ? room && room.secondUserId : room && room.firstUserId;
+  const userId = room ? (room.firstUserId === id ? room.secondUserId : room.firstUserId) : undefined;
   const skip = !userId;
-  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId}, {skip})
+  const { data: user } = chatAPI.useGetUserByIdQuery(
+    { accessToken, id: userId },
+    { skip }
+  );
   const [show, setShow] = useState(false);
   const [leaveRoom, {}] = chatAPI.useLeaveRoomMutation();
   const params = useParams();

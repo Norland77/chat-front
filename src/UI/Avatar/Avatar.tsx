@@ -11,8 +11,12 @@ interface PropsType {
 
 const Avatar = ({room, height, width}: PropsType) => {
   const {id, accessToken} = useAppSelector(state => state.userReducer)
-  const userId = room && room.firstUserId === id ? room.secondUserId : room && room.firstUserId;
-  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId})
+  const userId = room ? (room.firstUserId === id ? room.secondUserId : room.firstUserId) : undefined;
+  const skip = !userId;
+  const { data: user } = chatAPI.useGetUserByIdQuery(
+    { accessToken, id: userId },
+    { skip }
+  );
 
   return (
     <>

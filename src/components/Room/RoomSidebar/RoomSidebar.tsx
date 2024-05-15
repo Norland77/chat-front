@@ -27,9 +27,12 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
   const {data: images} = chatAPI.useGetAllImagesByRoomQuery({roomId, accessToken})
   const params = useParams();
 
-  const userId = room && room.firstUserId === id ? room.secondUserId : room && room.firstUserId;
+  const userId = room ? (room.firstUserId === id ? room.secondUserId : room.firstUserId) : undefined;
   const skip = !userId;
-  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId}, {skip})
+  const { data: user } = chatAPI.useGetUserByIdQuery(
+    { accessToken, id: userId },
+    { skip }
+  );
 
   useEffect(() => {
     if (room && room.inviteLink) {
