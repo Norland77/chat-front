@@ -52,7 +52,7 @@ const UsersListModal = ({isOpen, setIsOpen}: PropsType) => {
     };
 
     useEffect(() => {
-        console.log(users)
+
     }, [users]);
 
     return (

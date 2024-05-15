@@ -34,7 +34,6 @@ const Room = () => {
 
     useEffect(() => {
         if (messages) {
-            console.log(messages)
             setCurrentMessages(messages);
         }
 

@@ -11,11 +11,11 @@ class SocketApi {
         })
 
         this.socket.on('joinedRoom', (data) => {
-            console.log(data)
+            console.log(`joined to room with id: ${data}`)
         })
 
         this.socket.on('leftRoom', (data) => {
-            console.log(data)
+            console.log(`left room with id: ${data}`)
         })
     }
 }

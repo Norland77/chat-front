@@ -94,6 +94,7 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter') {
+      event.preventDefault();
       if (isEdit) {
         updateMessageFunc();
       } else {
@@ -129,6 +130,18 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
       setSelectedFiles(files);
     }
   };
+
+  const maxHeight = 80;
+  function expandTextarea(textarea: any) {
+    textarea.style.height = 'auto';
+
+    if (textarea.scrollHeight > maxHeight) {
+      textarea.style.height = maxHeight + 'px';
+      textarea.style.overflowY = 'auto';
+    } else {
+      textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + 'px';
+    }
+  }
 
   return (
     <>
@@ -167,6 +180,8 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
                         setText(e.target.value);
                       }} onKeyPress={handleKeyPress}
                       onClick={() => {setIsEmojiOpen(false)}}
+                      onInput= {(event) => expandTextarea(event.target)}
+                      rows={1}
             />
               {previewImages.map((previewUrl, index) => (
                 <img key={index} src={previewUrl} alt={`Selected File Preview ${index + 1}`} />
@@ -193,6 +208,7 @@ const RoomInput = ({ isUserExist, id, username, accessToken, setEditMsg, editId,
                       img={sendIcon}
                       onClick={isEdit ? updateMessageFunc : sendMessage}
                       font_size={'20px'}
+                      height={'45px'}
               />
             </> : <Button text={'Join to Chat'}
                           onClick={joinRoom}
