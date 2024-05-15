@@ -5,6 +5,7 @@ import Avatar from "../../../UI/Avatar/Avatar";
 import {useAppSelector} from "../../../hooks/redux";
 import {chatAPI} from "../../../services/ChatServices";
 import {IRoom} from "../../../interfaces/IRoom";
+import {IUser} from "../../../interfaces/IUser";
 
 interface PropsType {
   userCount: number
@@ -15,8 +16,9 @@ interface PropsType {
 
 const RoomHeader = ({userCount, room, id, deleteRoomFunc} : PropsType) => {
   const { accessToken} = useAppSelector(state => state.userReducer)
-  const userId = room && room.firstUserId === id ? room.secondUserId : room && room.firstUserId;
-  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId})
+  const userId = room && room.firstUserId === id ? room && room.secondUserId : room && room.firstUserId;
+  const skip = !userId;
+  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId}, {skip})
   const [show, setShow] = useState(false);
   const [leaveRoom, {}] = chatAPI.useLeaveRoomMutation();
   const params = useParams();
@@ -52,7 +54,7 @@ const RoomHeader = ({userCount, room, id, deleteRoomFunc} : PropsType) => {
                 </div>
                 <div>
                     <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.33331 0.333344C4.00723 0.333344 2.73546 0.860128 1.79778 1.79781C0.860097 2.73549 0.333313 4.00726 0.333313 5.33334V18.6667C0.333313 19.9928 0.860097 21.2645 1.79778 22.2022C2.73546 23.1399 4.00723 23.6667 5.33331 23.6667H22C23.3261 23.6667 24.5978 23.1399 25.5355 22.2022C26.4732 21.2645 27 19.9928 27 18.6667V16.0233L30.8216 19.845C31.0547 20.078 31.3517 20.2367 31.6749 20.301C31.9982 20.3653 32.3332 20.3323 32.6377 20.2061C32.9422 20.08 33.2025 19.8665 33.3856 19.5924C33.5688 19.3184 33.6666 18.9963 33.6666 18.6667V5.33334C33.6666 5.00376 33.5688 4.6816 33.3856 4.40758C33.2025 4.13356 32.9422 3.92 32.6377 3.79388C32.3332 3.66776 31.9982 3.63476 31.6749 3.69904C31.3517 3.76332 31.0547 3.92199 30.8216 4.15501L27 7.97668V5.33334C27 4.00726 26.4732 2.73549 25.5355 1.79781C24.5978 0.860128 23.3261 0.333344 22 0.333344H5.33331Z" fill="#A0A0A0"/>
+                        <path fillRule="evenodd" clipRule="evenodd" d="M5.33331 0.333344C4.00723 0.333344 2.73546 0.860128 1.79778 1.79781C0.860097 2.73549 0.333313 4.00726 0.333313 5.33334V18.6667C0.333313 19.9928 0.860097 21.2645 1.79778 22.2022C2.73546 23.1399 4.00723 23.6667 5.33331 23.6667H22C23.3261 23.6667 24.5978 23.1399 25.5355 22.2022C26.4732 21.2645 27 19.9928 27 18.6667V16.0233L30.8216 19.845C31.0547 20.078 31.3517 20.2367 31.6749 20.301C31.9982 20.3653 32.3332 20.3323 32.6377 20.2061C32.9422 20.08 33.2025 19.8665 33.3856 19.5924C33.5688 19.3184 33.6666 18.9963 33.6666 18.6667V5.33334C33.6666 5.00376 33.5688 4.6816 33.3856 4.40758C33.2025 4.13356 32.9422 3.92 32.6377 3.79388C32.3332 3.66776 31.9982 3.63476 31.6749 3.69904C31.3517 3.76332 31.0547 3.92199 30.8216 4.15501L27 7.97668V5.33334C27 4.00726 26.4732 2.73549 25.5355 1.79781C24.5978 0.860128 23.3261 0.333344 22 0.333344H5.33331Z" fill="#A0A0A0"/>
                     </svg>
                 </div>
             </>

@@ -22,9 +22,11 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5px;
     padding: 10px;
-    > img {
-      width: 100%;
-      cursor: pointer;
+    > div {
+      > img {
+        width: 100%;
+        cursor: pointer;
+      }
     }
   }
   > h3 {

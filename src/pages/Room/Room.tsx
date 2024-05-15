@@ -123,7 +123,7 @@ const Room = () => {
                 <div className={styles.room_body}>
                     <div className={styles.room_msgArea} ref={messagesEndRef}>
                         {currentMessages && currentMessages.map(message => (
-                            <RoomMessage message={message} id={id} editMessage={editMessage} isUserExist={isUserExist}/>
+                            <RoomMessage key={message.id} message={message} id={id} editMessage={editMessage} isUserExist={isUserExist}/>
                         ))}
                     </div>
                     <RoomInput

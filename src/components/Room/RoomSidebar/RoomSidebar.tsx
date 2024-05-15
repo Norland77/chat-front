@@ -28,8 +28,8 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
   const params = useParams();
 
   const userId = room && room.firstUserId === id ? room.secondUserId : room && room.firstUserId;
-
-  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId})
+  const skip = !userId;
+  const {data: user} = chatAPI.useGetUserByIdQuery({accessToken, id: userId}, {skip})
 
   useEffect(() => {
     if (room && room.inviteLink) {
@@ -102,7 +102,7 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
               <div className={styles.sidebar_users}>
                   <h3>User list</h3>
                 {room && room.users?.map(user => (
-                  <User user={user} room={room} id={id} username={username} accessToken={accessToken}/>
+                  <User key={user.id} user={user} room={room} id={id} username={username} accessToken={accessToken}/>
                 ))}
               </div>
           </div>
@@ -111,7 +111,7 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
       <div className={styles.image_grid}>
         {
           images && images.map(img => (
-            <>
+            <div key={img.id}>
               <img onClick={() => {
                 setIsOpenImg(true);
                 setImgName(img.name);
@@ -122,7 +122,7 @@ const RoomSidebar = ({room, username, accessToken, id, deleteRoomFunc}: PropsTyp
               }} style={isOpenImg && imgName === img.name ? {display: "flex"} : {}} className={styles.modal}>
                 <ModalImage imageUrl={img.path} imageName={img.name} />
               </div>
-            </>
+            </div>
           ))
         }
       </div>

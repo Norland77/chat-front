@@ -15,7 +15,7 @@ const RoomFiles = ({message}: PropsType) => {
   return (
     <div className={styles.filesGrid}>
       {message && message?.files?.map(file => (
-        <>
+        <div key={file.id}>
           {
             file.path !== "" &&
             <>
@@ -46,7 +46,7 @@ const RoomFiles = ({message}: PropsType) => {
               }
             </>
           }
-        </>
+        </div>
       ))}
     </div>
   );

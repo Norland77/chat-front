@@ -83,7 +83,7 @@ const Rooms = () => {
                                   <>
                                       {
                                           room.messages[room.messages.length - 1].files?.map(img => (
-                                            <img src={img.path} alt={img.name} />
+                                            <img key={img.id} src={img.path} alt={img.name} />
                                           ))
                                       }
                                   </> : room.messages.length > 0 && room.messages[room.messages.length - 1].text !== '' && room.messages[room.messages.length - 1].files.length > 0 ? <>

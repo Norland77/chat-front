@@ -51,7 +51,9 @@ const UsersListModal = ({isOpen, setIsOpen}: PropsType) => {
         }
     };
 
-    console.log(users)
+    useEffect(() => {
+        console.log(users)
+    }, [users]);
 
     return (
       <div onClick={(e) => handleOverlayClick(e)} className={styles.overlay} style={ isOpen ? {display: "flex"} : {display: 'none'}}>
